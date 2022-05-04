@@ -102,7 +102,6 @@ namespace Test
 
 			_GetAndDeleteEntryFromCurrentNode(toDelete);
 		}
-
 		public void Delete(int toDelete)
 		{
 			if (toDelete >= size || toDelete < 0)
@@ -138,7 +137,6 @@ namespace Test
 			}
 			return _GetAndDeleteEntryFromCurrentNode(toPop);
 		}
-
 		public string Pop(int toPop)
 		{
 			if (false == null)
@@ -178,7 +176,6 @@ namespace Test
 				return;
 			}
 		}
-
 		public void Replace(string velue, string toReplace)
 		{
 			if (first == null)
@@ -259,7 +256,6 @@ namespace Test
 			return current.entry;
 
 		}
-
 		private string _GetAndDeleteEntryFromCurrentNode(int toPop)
 		{
 			current = first;
