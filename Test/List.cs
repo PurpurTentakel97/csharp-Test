@@ -21,6 +21,24 @@ namespace Test
 		}
 
 
+		public List(string[] values)
+		{
+			size = 0;
+			first = null;
+			current = null;
+
+			for (int i = 0; i < values.Length; i++)
+			{
+				Add(values[i]);
+			}
+		}
+		public List(string value)
+		{
+			size = 0;
+			first = null;
+			current = null;
+			Add(value);
+		}
 		public List()
 		{
 			size = 0;

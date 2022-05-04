@@ -10,31 +10,31 @@ namespace Test
 	{
 		static void Main(string[] args)
 		{
-			var list1 = new List();
+			string[] strings = {"a","b","c","d","e"};
+			var list1 = new List(strings);
 
-			list1.Add("a",5);
-			list1.Add("b");
-			list1.Add("c");
-			list1.Add("d");
+			list1.Add("f",5);
 			Console.WriteLine(list1.Print());
 
-			var list2 = new List();
-			list2.Add("1");
-			list2.Add("2");
-			list2.Add("3");
-			list2.Add("4");
+
+			string[] strings2 = {"1","2","3","4","5"};
+			var list2 = new List(strings2);
 			Console.WriteLine(list2.Print());
 
-			var list3 = list1 + list2;
+			var list3 = new List();
+			list3.Add("blub");
 			Console.WriteLine(list3.Print());
 
-			list3.Replace("123",7);
-			list3.Replace("456",9);
-			list3.Replace("789",11);
-			Console.WriteLine(list3.Print());
+			var list4 = list1 + list2 + list3;
+			Console.WriteLine(list4.Print());
 
-			list3.Replace("abc", "a");
-			Console.WriteLine(list3.Print());
+			list4.Replace("123",7);
+			list4.Replace("456",9);
+			list4.Replace("789",11);
+			Console.WriteLine(list4.Print());
+
+			list4.Replace("abc", "f");
+			Console.WriteLine(list4.Print());
 		}
 
 	}
