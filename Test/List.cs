@@ -53,14 +53,14 @@ namespace Test
 				size++;
 				var node = new Node(entry);
 
-				if (first == null)
+				if (first is null)
 				{
 					first = node;
 					continue;
 				}
 
 				current = first;
-				while (current.next != null)
+				while (current.next is not null)
 				{
 					current = current.next;
 				}
@@ -87,7 +87,7 @@ namespace Test
 
 		public void Delete(string toDelete)
 		{
-			if (first == null)
+			if (first is null)
 			{
 				throw new ArgumentOutOfRangeException("No Nodes");
 			}
@@ -100,7 +100,7 @@ namespace Test
 				return;
 			}
 
-			_GetAndDeleteEntryFromCurrentNode(toDelete);
+			GetAndDeleteEntryFromCurrentNode(toDelete);
 		}
 		public void Delete(int toDelete)
 		{
@@ -117,12 +117,12 @@ namespace Test
 				return;
 			}
 
-			_GetAndDeleteEntryFromCurrentNode(toDelete);
+			GetAndDeleteEntryFromCurrentNode(toDelete);
 		}
 
 		public string Pop(string toPop)
 		{
-			if (first == null)
+			if (first is null)
 			{
 				throw new ArgumentOutOfRangeException("No Nodes");
 			}
@@ -135,11 +135,11 @@ namespace Test
 				first = first.next;
 				return ret;
 			}
-			return _GetAndDeleteEntryFromCurrentNode(toPop);
+			return GetAndDeleteEntryFromCurrentNode(toPop);
 		}
 		public string Pop(int toPop)
 		{
-			if (false == null)
+			if (first is null)
 			{
 				throw new ArgumentOutOfRangeException("no Nodes");
 			}
@@ -153,11 +153,11 @@ namespace Test
 				return ret;
 			}
 
-			return _GetAndDeleteEntryFromCurrentNode(toPop);
+			return GetAndDeleteEntryFromCurrentNode(toPop);
 
 		}
 
-		public void Replace(string velue, int toReplace)
+		public void Replace(string value, int toReplace)
 		{
 			if (toReplace >= size || toReplace < 0)
 			{
@@ -172,13 +172,13 @@ namespace Test
 					current = current.next;
 					continue;
 				}
-				current.entry = velue;
+				current.entry = value;
 				return;
 			}
 		}
-		public void Replace(string velue, string toReplace)
+		public void Replace(string value, string toReplace)
 		{
-			if (first == null)
+			if (first is null)
 			{
 				throw new ArgumentOutOfRangeException("No Nodes");
 			}
@@ -196,17 +196,56 @@ namespace Test
 					current = current.next;
 					continue;
 				}
-				current.entry = velue;
+				current.entry = value;
 
-				
+
 			}
 		}
 
-		public string Print()
+		public List Slice(int index_u, int index_o)
 		{
-			if (first == null)
+			if (index_u >= size || index_u < 0)
 			{
-				return ToString() + " [Empty]";
+				throw new ArgumentOutOfRangeException("Index out of Range");
+			}
+			if (index_o >= size || index_o < 0)
+			{
+				throw new ArgumentOutOfRangeException("Index out of Range");
+			}
+			if (index_u > index_o)
+			{
+				throw new InvalidDataException("lower index is greater upper index");
+			}
+
+			var ret = new List();
+			current = first;
+			for (int i = 0; true; i++)
+			{
+				if (i < index_u)
+				{
+					current = current.next;
+					continue;
+				}
+				ret.Add(current.entry);
+
+				if ((i + 1) >= index_o)
+				{
+					break;
+				}
+
+				current = current.next;
+			}
+
+			return ret;
+
+		}
+
+		public void Print()
+		{
+			if (first is null)
+			{
+				Console.WriteLine(ToString() + " [Empty]");
+				return;
 			}
 
 			current = first;
@@ -215,7 +254,7 @@ namespace Test
 			{
 				ret += current.entry + ",";
 
-				if (current.next == null)
+				if (current.next is null)
 				{
 					ret = ret.Remove(ret.Length - 1);
 					ret += "]";
@@ -224,13 +263,13 @@ namespace Test
 				current = current.next;
 			}
 
-			return ret;
+			Console.WriteLine(ret);
 		}
 
-		private string _GetAndDeleteEntryFromCurrentNode(string toPop)
+		private string GetAndDeleteEntryFromCurrentNode(string toPop)
 		{
 			current = first;
-			while (current != null)
+			while (current is not null)
 			{
 				if (current.entry != toPop)
 				{
@@ -256,7 +295,7 @@ namespace Test
 			return current.entry;
 
 		}
-		private string _GetAndDeleteEntryFromCurrentNode(int toPop)
+		private string GetAndDeleteEntryFromCurrentNode(int toPop)
 		{
 			current = first;
 			for (int i = 0; true; i++)
