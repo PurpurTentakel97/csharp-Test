@@ -160,6 +160,7 @@ namespace Test
 				return;
 			}
 		}
+
 		public void Replace(string velue, string toReplace)
 		{
 			if (first == null)
@@ -185,7 +186,6 @@ namespace Test
 				
 			}
 		}
-
 
 		public string Print()
 		{
