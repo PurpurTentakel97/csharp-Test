@@ -31,6 +31,7 @@
                         break;
                     }
                 }
+
                 if (!found)
                 {
                     Console.Write($"{i}, ");

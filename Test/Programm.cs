@@ -11,14 +11,16 @@ namespace Test
 {
     class Programm
     {
-        static string countName = "Baum";
-        static int count = 0;
+        static string countName = "Prime Numbers";
+        static int count = 1;
         static void Main(string[] args)
         {
             while (true)
             {
+                PrintCount();
                 Console.WriteLine("Geben sie eine Zahl ein. ('quit' um das Programm zu beenden.)");
                 string input = Console.ReadLine();
+
                 if (input == "quit")
                 {
                     break;
@@ -28,6 +30,7 @@ namespace Test
                     Console.WriteLine("keine Zahl eingegeben");
                     continue;
                 }
+
                 int input_int = 0;
                 try
                 {
@@ -38,7 +41,10 @@ namespace Test
                     Console.WriteLine("keine Ganzzahlzahl eingegeben");
                     continue;
                 }
+
                 PrimeNumbers.PrintPrimeNumbersTillX(maxNumber: input_int);
+
+                PrintBreak();
 
             }
             Console.WriteLine("Programm beendet");
@@ -52,7 +58,6 @@ namespace Test
 
         private static void PrintCount()
         {
-            Console.WriteLine(countName + " " + count.ToString());
             Console.WriteLine($"{countName} {count.ToString()}");
             count++;
         }
