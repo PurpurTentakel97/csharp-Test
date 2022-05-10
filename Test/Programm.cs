@@ -6,20 +6,50 @@
  */
 
 using Numbers;
+using Strings;
 
 namespace Test
 {
     class Programm
     {
-        static string countName = "Prime Numbers";
+        static string countName = "Entry";
         static int count = 1;
         static void Main(string[] args)
+        {
+            ReversingString();
+        }
+
+        private static void ReversingString()
+        {
+            while (true)
+            {
+                PrintCount();
+                Console.WriteLine("Geben Sie etwas ein");
+                string? input = Console.ReadLine();
+                if (input is null)
+                {
+                    Console.WriteLine("Kein Eingabe");
+                    PrintBreak();
+                    continue;
+                }
+                if (input == "quit")
+                {
+                    Console.WriteLine("Programm geschlossen");
+                    PrintBreak();
+                    break;
+                }
+                ReverseString.PrintReversedString(value: input);
+                PrintBreak();
+            }
+
+        }
+        private static void PrimeNumber()
         {
             while (true)
             {
                 PrintCount();
                 Console.WriteLine("Geben sie eine Zahl ein. ('quit' um das Programm zu beenden.)");
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
 
                 if (input == "quit")
                 {
@@ -27,28 +57,24 @@ namespace Test
                 }
                 if (input is null)
                 {
-                    Console.WriteLine("keine Zahl eingegeben");
+                    Console.WriteLine("keine Eingabe");
+                    PrintBreak();
                     continue;
                 }
 
-                int input_int = 0;
-                try
+                ushort input_ushort = 0;
+                if (!ushort.TryParse(input, out input_ushort))
                 {
-                    input_int = int.Parse(input);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("keine Ganzzahlzahl eingegeben");
+                    Console.WriteLine("Invalide Eingabe");
+                    PrintBreak();
                     continue;
                 }
 
-                PrimeNumbers.PrintPrimeNumbersTillX(maxNumber: input_int);
-
+                PrimeNumbers.PrintPrimeNumbersTillX(maxNumber: input_ushort);
                 PrintBreak();
 
             }
             Console.WriteLine("Programm beendet");
-
         }
 
         private static void PrintBreak()
