@@ -5,6 +5,7 @@
  * C# v. 10.0
  */
 
+using Lists;
 using Numbers;
 using Strings;
 
@@ -16,7 +17,7 @@ namespace Test
         static int count = 1;
         static void Main(string[] args)
         {
-            ReversingString();
+            List();
         }
 
         private static void ReversingString()
@@ -75,6 +76,27 @@ namespace Test
 
             }
             Console.WriteLine("Programm beendet");
+        }
+        private static void List()
+        {
+            var entry1 = new string[] { "1", "2", "3", "4", "5" };
+            var entry2 = new string[] { "a", "b", "c", "d", "e" };
+            var entry3 = new string[] { "aa 11 aa", "bb 22 bb", "cc 33 cc", "dd 44 dd", "ee 55 ee" };
+
+            PrintCount();
+            var list1 = new LinkedList();
+            list1.Print();
+            list1.Add(entry3);
+            list1.Print();
+            Console.WriteLine(list1.Count);
+            PrintBreak();
+
+            PrintCount();
+            var list2 = new LinkedList();
+            list2.Add("123", 20);
+            list2.Print();
+            Console.WriteLine(list2.Count);
+            PrintBreak();
         }
 
         private static void PrintBreak()
