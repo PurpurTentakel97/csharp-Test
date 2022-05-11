@@ -17,7 +17,7 @@ namespace Test
         static int count = 1;
         static void Main(string[] args)
         {
-            List();
+            PrimeNumber();
         }
 
         private static void ReversingString()
@@ -99,6 +99,17 @@ namespace Test
             PrintBreak();
         }
 
+        private static void ConvertByte()
+        {
+            while (true)
+            {
+                byte value = GetByte();
+
+                Console.WriteLine(value);
+                Console.WriteLine(PrimeNumbers.ConvertNumberInto8Bit(value));
+            }
+        }
+
         private static void PrintBreak()
         {
             Console.WriteLine("|----------------------------------------------------------------------------------------------------|");
@@ -108,6 +119,22 @@ namespace Test
         {
             Console.WriteLine($"{countName} {count.ToString()}");
             count++;
+        }
+
+        private static byte GetByte()
+        {
+            while (true)
+            {
+                Console.WriteLine("Gib eine Zahl ein:");
+                string value = Console.ReadLine();
+                bool valid = byte.TryParse(value, out byte valueb);
+                if (valid)
+                {
+                    return valueb;
+                }
+                Console.WriteLine("Ungültige Zahl");
+                PrintBreak();
+            }
         }
 
     }
