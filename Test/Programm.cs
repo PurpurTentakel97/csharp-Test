@@ -7,6 +7,7 @@
 
 using Menues;
 using Numbers;
+using Strings;
 
 namespace Test
 {
@@ -18,6 +19,7 @@ namespace Test
             ("Gerade zahlen anzeigen",EvenNumbersF),
             ("Prim Zahlen bis x",PrimeNumbersF),
             ("Zahlen zu Bit convertieren",BitConverterF),
+            ("Sätze umdrehen",ReverseStringF),
          };
 
         static void Main(string[] args)
@@ -84,93 +86,14 @@ namespace Test
             bitConverter.Game();
             Console.Clear();
         }
-
-    }
-
-
-
-
-    /*private static void ReversingString()
-    {
-        while (true)
+        private static void ReverseStringF()
         {
-            PrintCount();
-            Console.WriteLine("Geben Sie etwas ein");
-            string? input = Console.ReadLine();
-            if (input is null)
-            {
-                Console.WriteLine("Kein Eingabe");
-                PrintBreak();
-                continue;
-            }
-            if (input == "quit")
-            {
-                Console.WriteLine("Programm geschlossen");
-                PrintBreak();
-                break;
-            }
-            ReverseString.PrintReversedString(value: input);
-            PrintBreak();
+            Console.Clear();
+            PrintHeadline("Sätze umdrehen");
+            var reverseString = new ReverseString();
+            reverseString.Game();
+            Console.Clear();
         }
 
     }
-    private static void PrimeNumber()
-    {
-        while (true)
-        {
-            PrintCount();
-            Console.WriteLine("Geben sie eine Zahl ein. ('quit' um das Programm zu beenden.)");
-            string? input = Console.ReadLine();
-
-            if (input == "quit")
-            {
-                break;
-            }
-            if (input is null)
-            {
-                Console.WriteLine("keine Eingabe");
-                PrintBreak();
-                continue;
-            }
-
-            ushort input_ushort = 0;
-            if (!ushort.TryParse(input, out input_ushort))
-            {
-                Console.WriteLine("Invalide Eingabe");
-                PrintBreak();
-                continue;
-            }
-
-            PrimeNumbers.PrintPrimeNumbersTillX(maxNumber: input_ushort);
-            PrintBreak();
-
-        }
-        Console.WriteLine("Programm beendet");
-    }
-
-    private static void ConvertByte()
-    {
-        while (true)
-        {
-            byte value = GetByte();
-
-            Console.WriteLine(value);
-            Console.WriteLine(PrimeNumbers.ConvertNumberInto8Bit(value));
-        }
-    }
-
-    private static byte GetByte()
-    {
-        while (true)
-        {
-            Console.WriteLine("Gib eine Zahl ein:");
-            string value = Console.ReadLine();
-            bool valid = byte.TryParse(value, out byte valueb);
-            if (valid)
-            {
-                return valueb;
-            }
-            Console.WriteLine("Ungültige Zahl");
-            PrintBreak();
-        }*/
 }
