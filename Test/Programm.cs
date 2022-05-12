@@ -8,6 +8,7 @@
 using Menues;
 using Numbers;
 using Strings;
+using Tree;
 
 namespace Test
 {
@@ -20,6 +21,7 @@ namespace Test
             ("Prim Zahlen bis x",PrimeNumbersF),
             ("Zahlen zu Bit convertieren",BitConverterF),
             ("Sätze umdrehen",ReverseStringF),
+            ("Weihnachtsbaum zeichnen",ChristmasTreeF),
          };
 
         static void Main(string[] args)
@@ -92,6 +94,14 @@ namespace Test
             PrintHeadline("Sätze umdrehen");
             var reverseString = new ReverseString();
             reverseString.Game();
+            Console.Clear();
+        }
+        private static void ChristmasTreeF()
+        {
+            Console.Clear();
+            PrintHeadline("Weihnachtsbaum");
+            var christmasTree = new ChristmasTree();
+            christmasTree.Game();
             Console.Clear();
         }
 

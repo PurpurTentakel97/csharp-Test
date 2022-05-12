@@ -1,16 +1,31 @@
-﻿namespace Tree
+﻿/*
+ * Purpur Tentakel
+ * 02.05.2022
+ * Test - Tree
+ */
+
+using Helpers;
+
+namespace Tree
 {
     internal class ChristmasTree
     {
-        byte height;
-
-        public ChristmasTree(byte height)
+        public void Game()
         {
-            this.height = height;
-        }
+            while (true)
+            {
+                Print();
 
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
         public void Print()
         {
+            byte height = GetInput();
             int leaves = 1;
             for (int i = 0; i < height - 1; i++)
             {
@@ -34,8 +49,25 @@
                 }
                 Console.WriteLine("|");
             }
-
-
+        }
+        private byte GetInput()
+        {
+            while (true)
+            {
+                Console.WriteLine("Gib die höhe des Baums ein (<256)");
+                string inputRaw = Console.ReadLine();
+                if (!byte.TryParse(inputRaw, out byte input))
+                {
+                    Console.WriteLine("Invalider Input");
+                    continue;
+                }
+                if (input < 3)
+                {
+                    Console.WriteLine("Invalider Input");
+                    continue;
+                }
+                return input;
+            }
         }
     }
 }
