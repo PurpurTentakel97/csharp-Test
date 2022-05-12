@@ -1,4 +1,11 @@
-﻿namespace Helpers
+﻿/*
+ * Purpur Tentakel
+ * 02.05.2022
+ * Test - Helper
+ */
+
+
+namespace Helpers
 {
     internal class Helper
     {
