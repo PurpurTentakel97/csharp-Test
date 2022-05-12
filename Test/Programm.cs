@@ -14,7 +14,7 @@ namespace Test
 {
     class Programm
     {
-        public static (string Name, Action Funktion)[] menueValue = new (string, Action)[]
+        public static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("Zahlen raten",GuessingNumbersF),
             ("Gerade zahlen anzeigen",EvenNumbersF),

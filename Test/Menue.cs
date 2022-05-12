@@ -67,12 +67,12 @@ namespace Menues
             }
         }
 
-        private void CreateEntries((string, Action)[] entrieValues)
+        private void CreateEntries((string Name, Action Funktion)[] entrieValues)
         {
             for (int i = 0; i < entrieValues.Length; i++)
             {
                 var value = entrieValues[i];
-                var entry = new Entry(value.Item1, value.Item2);
+                var entry = new Entry(value.Name, value.Funktion);
                 entries[i] = entry;
             }
         }
