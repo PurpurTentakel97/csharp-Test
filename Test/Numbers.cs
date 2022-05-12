@@ -193,10 +193,8 @@ namespace Numbers
                 {
                     Console.WriteLine($"Du hast die Zahl leider nicht erraten. Die richtige Zahl wäre {correctNumber} gewesen.");
                 }
-                Console.WriteLine("Wenn du noch ein Spiel spielen möchtest drücke 'Enter'");
-                Console.WriteLine("Schreibe 'quit' mas Programm zu beenden");
-                string question = Console.ReadLine();
-                if (question == "q")
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
                 {
                     break;
                 }
