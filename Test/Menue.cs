@@ -63,7 +63,8 @@
         {
             for (int i = 0; i < entrieValues.Length; i++)
             {
-                var entry = new Entry(entrieValues[i]);
+                var value = entrieValues[i];
+                var entry = new Entry(value.Item1, value.Item2);
                 entries[i] = entry;
             }
         }
@@ -95,10 +96,10 @@
             public string name;
             public Action action;
 
-            public Entry((string, Action) entry)
+            public Entry(string name, Action action)
             {
-                name = entry.Item1;
-                action = entry.Item2;
+                this.name = name;
+                this.action = action;
             }
 
         }
