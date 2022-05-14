@@ -14,7 +14,10 @@ namespace Tree
         {
             while (true)
             {
-                Print();
+                Helper.PrintHeadline("Weihnachtsbaum");
+
+                byte height = Helper.GetByte("Gib die Höhe des baumes an.");
+                Print(height);
 
                 string quitInput = Helper.GetQuitInput();
                 if (quitInput == "q")
@@ -23,9 +26,8 @@ namespace Tree
                 }
             }
         }
-        public void Print()
+        public void Print(byte height)
         {
-            byte height = GetInput();
             int leaves = 1;
             for (int i = 0; i < height - 1; i++)
             {
@@ -48,25 +50,6 @@ namespace Tree
                     Console.Write(" ");
                 }
                 Console.WriteLine("|");
-            }
-        }
-        private byte GetInput()
-        {
-            while (true)
-            {
-                Console.WriteLine("Gib die höhe des Baums ein (<256)");
-                string inputRaw = Console.ReadLine();
-                if (!byte.TryParse(inputRaw, out byte input))
-                {
-                    Console.WriteLine("Invalider Input");
-                    continue;
-                }
-                if (input < 3)
-                {
-                    Console.WriteLine("Invalider Input");
-                    continue;
-                }
-                return input;
             }
         }
     }

@@ -14,6 +14,8 @@ namespace Strings
         {
             while (true)
             {
+                Helper.PrintHeadline("Sätze umdrehen");
+
                 PrintReversedString();
 
                 string quitInput = Helper.GetQuitInput();
@@ -26,30 +28,10 @@ namespace Strings
 
         private void PrintReversedString()
         {
-            string value = GetInput();
+            string value = Helper.GetString("Gib einen Satz ein.");
             char[] chars = value.ToCharArray();
             Array.Reverse(chars);
             Console.WriteLine(new string(chars));
-        }
-
-        private string GetInput()
-        {
-            while (true)
-            {
-                Console.WriteLine("Gib einen Satz ein.");
-                string input = Console.ReadLine();
-                if (input is null)
-                {
-                    Console.WriteLine("Invalider Input");
-                    continue;
-                }
-                if (input.Length == 60000)
-                {
-                    Console.WriteLine("Invalider Input");
-                    continue;
-                }
-                return input;
-            }
         }
     }
 }

@@ -41,6 +41,40 @@ namespace Helpers
             }
 
         }
+        public static byte GetByte(string text)
+        {
+            while (true)
+            {
+                Console.WriteLine(text);
+                string inputRaw = Console.ReadLine();
+
+                if (!byte.TryParse(inputRaw, out byte input))
+                {
+                    Console.WriteLine(invalidInput);
+                    continue;
+                }
+
+                return input;
+            }
+
+        }
+        public static ushort GetUshort(string text)
+        {
+            while (true)
+            {
+                Console.WriteLine(text);
+                string inputRaw = Console.ReadLine();
+
+                if (!ushort.TryParse(inputRaw, out ushort input))
+                {
+                    Console.WriteLine(invalidInput);
+                    continue;
+                }
+
+                return input;
+            }
+
+        }
         public static int GetInt(string text)
         {
             while (true)
@@ -58,6 +92,7 @@ namespace Helpers
             }
 
         }
+
 
 
         public static void PrintHeadline(string name)

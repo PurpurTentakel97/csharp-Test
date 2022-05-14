@@ -14,9 +14,12 @@ namespace Numbers
 
         public void Game()
         {
+
             while (true)
             {
-                ushort input = GetInput();
+                Helper.PrintHeadline("Prim Zahlen Ausgeben");
+
+                ushort input = Helper.GetUshort("Trage ein bis zu welcher Zahl die Primzahlen ausgegeben werden sollen.");
                 PrintPrimeNumbersTillX(input);
 
                 string quitInput = Helper.GetQuitInput();
@@ -28,7 +31,7 @@ namespace Numbers
         }
         private void PrintPrimeNumbersTillX(ushort maxNumber)
         {
-            Helper.PrintHeadline("Pim-Zahlen");
+            Helper.PrintHeadline("Prim Zahlen Ausgeben");
 
             for (int i = 2; i < maxNumber; i++)
             {
@@ -54,45 +57,27 @@ namespace Numbers
             }
             Console.WriteLine("");
         }
-
-        private ushort GetInput()
-        {
-            while (true)
-            {
-                Console.WriteLine("Trage ein bis zu welcher Zahl die Primzahlen ausgegeben werden sollen.");
-                string input_raw = Console.ReadLine();
-                if (!ushort.TryParse(input_raw, out ushort input))
-                {
-                    Console.WriteLine("Invalud Input");
-                    continue;
-                }
-                if (input < 2)
-                {
-                    Console.WriteLine("Invalud Input");
-                    continue;
-                }
-                return input;
-            }
-        }
     }
 
     internal class EvenNumbers
     {
+        Menue menue;
         private static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("For-Schleife",PrintFirstTenEvenNumbersFor),
             ("While_schleife",PrintFirstTenEvenNumbersWhile),
             ("Do-While_schleife",PrintFirstTenEvenNumbersDoWhile),
         };
-        Menue menue;
+
 
         public EvenNumbers(Menue before)
         {
-            menue = new Menue("Schleifenart", menueValue, before);
+            menue = new Menue("Gerade Zahlen Ausgeben", menueValue, before);
         }
 
         public void Game()
         {
+
             while (true)
             {
                 menue.Print();
@@ -180,8 +165,11 @@ namespace Numbers
 
         public void Game()
         {
+
             while (true)
             {
+                Helper.PrintHeadline("Zahlen-Raten_Spiel");
+
                 correctNumber = (byte)Random.Shared.Next(0, 101);
                 bool win = false;
                 byte count = 1;
@@ -190,7 +178,7 @@ namespace Numbers
                 {
                     Console.WriteLine($"Runde {count}:");
                     Console.WriteLine($"Verbleivbende Versuche: {maxCount - count + 1}");
-                    byte input = GetInput();
+                    byte input = Helper.GetByte("Gib deine Vermutung ein (0-100)");
                     if (CheckInput(input))
                     {
                         win = true;
@@ -214,25 +202,6 @@ namespace Numbers
                 }
             }
             Console.WriteLine("Programm beendet.");
-        }
-
-        private byte GetInput()
-        {
-            while (true)
-            {
-                Console.WriteLine("Gib deine Vermutung ein (0-100)");
-                string inputS = Console.ReadLine();
-
-                if (byte.TryParse(inputS, out byte input))
-                {
-                    if (input < 101)
-                    {
-                        return input;
-                    }
-                }
-
-                Console.WriteLine("Ungültige Eingabe");
-            }
         }
         private bool CheckInput(byte input)
         {
@@ -260,7 +229,9 @@ namespace Numbers
         {
             while (true)
             {
-                byte input = GetInput();
+                Helper.PrintHeadline("8 Bit Zahlen Konvertieren");
+
+                byte input = Helper.GetByte("Gib die zu konventierenede Zahl ein (< 256)");
                 string bit8 = ConvertNumberInto8Bit(input);
                 Console.WriteLine(bit8);
 
@@ -290,22 +261,5 @@ namespace Numbers
             }
             return ret;
         }
-
-        private byte GetInput()
-        {
-            while (true)
-            {
-                Console.WriteLine("Gib die zu konventierenede Zahl ein (< 256)");
-                string inputRaw = Console.ReadLine();
-                if (!byte.TryParse(inputRaw, out byte input))
-                {
-                    Console.WriteLine("Invalider input");
-                    continue;
-                }
-
-                return input;
-            }
-        }
     }
-
 }
