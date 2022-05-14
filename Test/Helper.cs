@@ -30,6 +30,13 @@ namespace Helpers
                     continue;
                 }
 
+                input = input.Trim();
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine(invalidInput);
+                    continue;
+                }
+
                 return input;
             }
 

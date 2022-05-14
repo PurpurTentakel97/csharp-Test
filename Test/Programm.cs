@@ -25,7 +25,8 @@ namespace Test
             ("Zahlen zu Bit convertieren",BitConverterF),
             ("Sätze umdrehen",ReverseStringF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
-            ("Wörterbuch",DictionaryF),
+            ("Wörterbuch Liste",DictionaryListF),
+            ("Wörterbuch Dict",DictionaryDictF),
          };
 
         static void Main(string[] args)
@@ -38,7 +39,6 @@ namespace Test
                 action();
             }
         }
-
 
         private static void GuessingNumbersF()
         {
@@ -76,12 +76,17 @@ namespace Test
             var christmasTree = new ChristmasTree();
             christmasTree.Game();
         }
-        private static void DictionaryF()
+        private static void DictionaryListF()
         {
             Helper.PrintHeadline("Wörterbuch");
-            var myDictionary = new MyDictionarry();
+            var myDictionary = new MyDictionarryList();
             myDictionary.Game();
         }
-
+        private static void DictionaryDictF()
+        {
+            Helper.PrintHeadline("Wörterbuch");
+            var myDictionary = new MyDictionarryDict();
+            myDictionary.Game();
+        }
     }
 }
