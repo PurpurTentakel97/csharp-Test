@@ -35,6 +35,10 @@ namespace Menues
         public Action GetAction()
         {
             byte input = GetInput();
+            if (input == 0)
+            {
+                return null;
+            }
             return entries[input - 1].action;
         }
 
@@ -57,7 +61,7 @@ namespace Menues
                         Console.WriteLine("closing...");
                         Environment.Exit(0);
                     }
-                    bevore.Print();
+                    return 0;
 
                 }
                 if (!byte.TryParse(inputRaw, out byte input))

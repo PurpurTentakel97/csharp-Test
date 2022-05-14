@@ -31,7 +31,7 @@ namespace Test
 
         static void Main(string[] args)
         {
-            menue = new Menue("Menü", menueValue);
+            menue = new Menue("Hauptmenü", menueValue);
             while (true)
             {
                 menue.Print();
@@ -49,8 +49,8 @@ namespace Test
         private static void EvenNumbersF()
         {
             Helper.PrintHeadline("Zahlen-Raten_Spiel");
-            var evenNumebrs = new EvenNumbers();
-            evenNumebrs.Game(menue);
+            var evenNumebrs = new EvenNumbers(menue);
+            evenNumebrs.Game();
         }
         private static void PrimeNumbersF()
         {
@@ -79,13 +79,13 @@ namespace Test
         private static void DictionaryListF()
         {
             Helper.PrintHeadline("Wörterbuch");
-            var myDictionary = new MyDictionarryList();
+            var myDictionary = new MyDictionarryList(menue);
             myDictionary.Game();
         }
         private static void DictionaryDictF()
         {
             Helper.PrintHeadline("Wörterbuch");
-            var myDictionary = new MyDictionarryDict();
+            var myDictionary = new MyDictionarryDict(menue);
             myDictionary.Game();
         }
     }

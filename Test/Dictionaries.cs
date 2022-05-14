@@ -17,7 +17,7 @@ namespace Dictionaries
         // even index = Explanation
         private static string saved = "saved....";
         private static LinkedList entries = new LinkedList();
-        public (string, Action)[] menueValue = new (string, Action)[]
+        private static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("Eintrag anzeigen",Show),
             ("Alle Einträge anzeigen",ShowAll),
@@ -27,14 +27,24 @@ namespace Dictionaries
             ("Wörterbuch Speichern",Save),
             ("Wörterbuch laden",Load),
          };
+        private Menue menue;
+
+        public MyDictionarryList(Menue bevore)
+        {
+            menue = new Menue("Wörterbuch", menueValue, bevore);
+        }
 
         public void Game()
         {
-            Menue menue = new Menue("Wörterbuch", menueValue);
+
             while (true)
             {
                 menue.Print();
                 Action action = menue.GetAction();
+                if (action == null)
+                {
+                    break;
+                }
                 action();
             }
         }
@@ -206,7 +216,7 @@ namespace Dictionaries
     {
         private static string saved = "saved....";
         private static Dictionary<string, string> entries = new Dictionary<string, string>();
-        public (string, Action)[] menueValue = new (string, Action)[]
+        private static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("Eintrag anzeigen",Show),
             ("Alle Einträge anzeigen",ShowAll),
@@ -216,14 +226,23 @@ namespace Dictionaries
             ("Wörterbuch Speichern",Save),
             ("Wörterbuch laden",Load),
         };
+        private Menue menue;
+
+        public MyDictionarryDict(Menue before)
+        {
+            menue = new Menue("Wörterbuch", menueValue, before);
+        }
 
         public void Game()
         {
-            Menue menue = new Menue("Wörterbuch", menueValue);
             while (true)
             {
                 menue.Print();
                 Action action = menue.GetAction();
+                if (action == null)
+                {
+                    break;
+                }
                 action();
             }
         }

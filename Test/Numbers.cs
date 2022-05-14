@@ -28,6 +28,8 @@ namespace Numbers
         }
         private void PrintPrimeNumbersTillX(ushort maxNumber)
         {
+            Helper.PrintHeadline("Pim-Zahlen");
+
             for (int i = 2; i < maxNumber; i++)
             {
                 bool found = false;
@@ -76,31 +78,36 @@ namespace Numbers
 
     internal class EvenNumbers
     {
-        public (string, Action)[] menueValue = new (string, Action)[]
-{
+        private static (string, Action)[] menueValue = new (string, Action)[]
+        {
             ("For-Schleife",PrintFirstTenEvenNumbersFor),
             ("While_schleife",PrintFirstTenEvenNumbersWhile),
             ("Do-While_schleife",PrintFirstTenEvenNumbersDoWhile),
- };
+        };
+        Menue menue;
 
-        public void Game(Menue? bevore)
+        public EvenNumbers(Menue before)
         {
-            var menue = new Menue("Schleifenart", menueValue, bevore);
+            menue = new Menue("Schleifenart", menueValue, before);
+        }
+
+        public void Game()
+        {
             while (true)
             {
                 menue.Print();
                 Action action = menue.GetAction();
-                action();
-                string input = Helper.GetQuitInput();
-                if (input == "q")
+                if (action == null)
                 {
                     break;
                 }
-
+                action();
             }
         }
         private static void PrintFirstTenEvenNumbersFor()
         {
+            Helper.PrintHeadline("For-Schleife");
+
             (int left, int top) cursorPosition;
             for (int i = 1; i < 12; i++)
             {
@@ -118,9 +125,12 @@ namespace Numbers
             cursorPosition = Console.GetCursorPosition();
             Console.SetCursorPosition(cursorPosition.left - 2, cursorPosition.top);
             Console.WriteLine(".");
+            Console.ReadLine();
         }
         private static void PrintFirstTenEvenNumbersWhile()
         {
+            Helper.PrintHeadline("While-Schleife");
+
             int index = 1;
             while (index < 21)
             {
@@ -130,9 +140,12 @@ namespace Numbers
             var cursorPosition = Console.GetCursorPosition();
             Console.SetCursorPosition(cursorPosition.Left - 2, cursorPosition.Top);
             Console.WriteLine(".");
+            Console.ReadLine();
         }
         private static void PrintFirstTenEvenNumbersDoWhile()
         {
+            Helper.PrintHeadline("Do-While-Schleife");
+
             int index = 1;
             do
             {
@@ -142,6 +155,7 @@ namespace Numbers
             var cursorPosition = Console.GetCursorPosition();
             Console.SetCursorPosition(cursorPosition.Left - 2, cursorPosition.Top);
             Console.WriteLine(".");
+            Console.ReadLine();
         }
 
         private static void PrintEvenNumber(int index)
