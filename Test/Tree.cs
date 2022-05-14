@@ -36,8 +36,21 @@ namespace Tree
                     Console.Write(" ");
                 }
 
+                Random rand = new Random();
                 for (int k = 0; k < leaves; k++)
                 {
+                    if (i == 0)
+                    {
+                        Console.Write("X");
+                        continue;
+                    }
+
+                    int randInt = rand.Next(0, 1000);
+                    if (randInt < 30)
+                    {
+                        Console.Write("O");
+                        continue;
+                    }
                     Console.Write("*");
                 }
                 leaves += 2;
