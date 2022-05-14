@@ -46,7 +46,7 @@ namespace Test
         }
         private static void EvenNumbersF()
         {
-            var evenNumebrs = new EvenNumbers(menue);
+            var evenNumebrs = new EvenNumbers();
             evenNumebrs.Game();
         }
         private static void PrimeNumbersF()
@@ -71,12 +71,12 @@ namespace Test
         }
         private static void DictionaryListF()
         {
-            var myDictionary = new MyDictionarryList(menue);
+            var myDictionary = new MyDictionarryList();
             myDictionary.Game();
         }
         private static void DictionaryDictF()
         {
-            var myDictionary = new MyDictionarryDict(menue);
+            var myDictionary = new MyDictionarryDict();
             myDictionary.Game();
         }
     }

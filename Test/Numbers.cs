@@ -61,7 +61,6 @@ namespace Numbers
 
     internal class EvenNumbers
     {
-        Menue menue;
         private static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("For-Schleife",PrintFirstTenEvenNumbersFor),
@@ -69,15 +68,9 @@ namespace Numbers
             ("Do-While_schleife",PrintFirstTenEvenNumbersDoWhile),
         };
 
-
-        public EvenNumbers(Menue before)
-        {
-            menue = new Menue("Gerade Zahlen Ausgeben", menueValue, before);
-        }
-
         public void Game()
         {
-
+            Menue menue = new Menue("Gerade Zahlen Ausgeben", menueValue, before: true);
             while (true)
             {
                 menue.Print();

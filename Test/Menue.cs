@@ -12,12 +12,12 @@ namespace Menues
     {
         private string name;
         private Entry[] entries;
-        private Menue? bevore;
+        private bool before = false;
 
-        public Menue(string name, (string, Action)[] entrieValues, Menue? bevore = null)
+        public Menue(string name, (string, Action)[] entrieValues, bool before = false)
         {
             this.name = name;
-            this.bevore = bevore;
+            this.before = before;
             entries = new Entry[entrieValues.Length];
             CreateEntries(entrieValues);
         }
@@ -56,7 +56,7 @@ namespace Menues
                 }
                 if (inputRaw == "q")
                 {
-                    if (bevore == null)
+                    if (before is false)
                     {
                         Console.WriteLine("closing...");
                         Environment.Exit(0);

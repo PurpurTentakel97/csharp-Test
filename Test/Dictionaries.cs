@@ -27,16 +27,12 @@ namespace Dictionaries
             ("Wörterbuch Speichern",Save),
             ("Wörterbuch laden",Load),
          };
-        private Menue menue;
 
-        public MyDictionarryList(Menue bevore)
-        {
-            menue = new Menue("Wörterbuch", menueValue, bevore);
-        }
+
 
         public void Game()
         {
-
+            Menue menue = new Menue("Wörterbuch", menueValue, before: true);
             while (true)
             {
                 menue.Print();
@@ -226,15 +222,10 @@ namespace Dictionaries
             ("Wörterbuch Speichern",Save),
             ("Wörterbuch laden",Load),
         };
-        private Menue menue;
-
-        public MyDictionarryDict(Menue before)
-        {
-            menue = new Menue("Wörterbuch", menueValue, before);
-        }
 
         public void Game()
         {
+            Menue menue = new Menue("Wörterbuch", menueValue, before: true);
             while (true)
             {
                 menue.Print();
