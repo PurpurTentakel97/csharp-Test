@@ -5,7 +5,7 @@
  * C# v. 10.0
  */
 
-using Dictionarys;
+using Dictionaries;
 using Helpers;
 using Menues;
 using Numbers;

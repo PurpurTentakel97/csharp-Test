@@ -1,7 +1,7 @@
 ﻿/*
  * Purpur Tentakel
  * 13.05.2022
- * Test - Dictionarys
+ * Test - Dictionaries
  */
 
 using Helpers;
@@ -9,7 +9,7 @@ using Lists;
 using Menues;
 using System.Text.Json;
 
-namespace Dictionarys
+namespace Dictionaries
 {
     internal class MyDictionarryList
     {
