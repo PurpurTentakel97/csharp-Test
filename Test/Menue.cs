@@ -12,10 +12,12 @@ namespace Menues
     {
         private string name;
         private Entry[] entries;
+        private Menue? bevore;
 
-        public Menue(string name, (string, Action)[] entrieValues)
+        public Menue(string name, (string, Action)[] entrieValues, Menue? bevore = null)
         {
             this.name = name;
+            this.bevore = bevore;
             entries = new Entry[entrieValues.Length];
             CreateEntries(entrieValues);
         }
@@ -50,8 +52,13 @@ namespace Menues
                 }
                 if (inputRaw == "q")
                 {
-                    Console.WriteLine("closing...");
-                    Environment.Exit(0);
+                    if (bevore == null)
+                    {
+                        Console.WriteLine("closing...");
+                        Environment.Exit(0);
+                    }
+                    bevore.Print();
+
                 }
                 if (!byte.TryParse(inputRaw, out byte input))
                 {

@@ -83,9 +83,9 @@ namespace Numbers
             ("Do-While_schleife",PrintFirstTenEvenNumbersDoWhile),
  };
 
-        public void Game()
+        public void Game(Menue? bevore)
         {
-            var menue = new Menue("Schleifenart", menueValue);
+            var menue = new Menue("Schleifenart", menueValue, bevore);
             while (true)
             {
                 menue.Print();

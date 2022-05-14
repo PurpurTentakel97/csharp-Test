@@ -160,6 +160,12 @@ namespace Lists
             }
         }
 
+        public void Clear()
+        {
+            first = null;
+            size = 0;
+        }
+
         public LinkedList Slice(int index_u, int index_o)
         {
             if (!IsValidIndex(index_u) || !IsValidIndex(index_o))
@@ -235,6 +241,31 @@ namespace Lists
             }
 
             GetAndDeleteNode(value);
+        }
+
+        public bool Exists(int index)
+        {
+            try
+            {
+                Get(index);
+                return true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+        public bool Exists(string value)
+        {
+            try
+            {
+                Get(value);
+                return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                return false;
+            }
         }
 
         public void Print()
