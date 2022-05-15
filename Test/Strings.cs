@@ -93,7 +93,6 @@ namespace Strings
                 Console.WriteLine(new string(chars));
             }
         }
-
         internal class StringList
         {
 
