@@ -70,7 +70,7 @@ namespace Numbers
 
         public void Game()
         {
-            Menue menue = new Menue("Gerade Zahlen Ausgeben", menueValue, before: true);
+            Menue menue = new Menue("Gerade Zahlen Ausgeben", menueValue);
             while (true)
             {
                 menue.Print();

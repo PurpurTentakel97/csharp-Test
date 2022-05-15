@@ -32,7 +32,7 @@ namespace Dictionaries
 
         public void Game()
         {
-            Menue menue = new Menue("Wörterbuch", menueValue, before: true);
+            Menue menue = new Menue("Wörterbuch", menueValue);
             while (true)
             {
                 menue.Print();
@@ -225,7 +225,7 @@ namespace Dictionaries
 
         public void Game()
         {
-            Menue menue = new Menue("Wörterbuch", menueValue, before: true);
+            Menue menue = new Menue("Wörterbuch", menueValue);
             while (true)
             {
                 menue.Print();

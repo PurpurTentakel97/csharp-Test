@@ -22,7 +22,7 @@ namespace Test
             ("Gerade zahlen anzeigen",EvenNumbersF),
             ("Prim Zahlen bis x",PrimeNumbersF),
             ("Zahlen zu Bit convertieren",BitConverterF),
-            ("Sätze umdrehen",ReverseStringF),
+            ("Sätz Spiele",StringGameF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
             ("Wörterbuch Dict",DictionaryDictF),
@@ -35,8 +35,13 @@ namespace Test
             {
                 menue.Print();
                 var action = menue.GetAction();
+                if (action == null)
+                {
+                    break;
+                }
                 action();
             }
+            Console.WriteLine("closing...");
         }
 
         private static void GuessingNumbersF()
@@ -59,10 +64,10 @@ namespace Test
             var bitConverter = new MyBitConverter();
             bitConverter.Game();
         }
-        private static void ReverseStringF()
+        private static void StringGameF()
         {
-            var reverseString = new ReverseString();
-            reverseString.Game();
+            var stringGame = new StringGame();
+            stringGame.Game();
         }
         private static void ChristmasTreeF()
         {
