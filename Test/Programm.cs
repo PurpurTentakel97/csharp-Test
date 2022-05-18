@@ -21,7 +21,10 @@ namespace Test
             ("Zahlen raten",GuessingNumbersF),
             ("Gerade zahlen anzeigen",EvenNumbersF),
             ("Prim Zahlen bis x",PrimeNumbersF),
+            ("Effiziernte-Prim Zahlen bis x",EfficientPrimeNumbersF),
             ("Zahlen zu Bit convertieren",BitConverterF),
+            ("Arithmetischer Mittelwert berechnen",MeanF),
+            ("Collatz Problem anzeigen",CollatzF),
             ("Sätz Spiele",StringGameF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
@@ -59,10 +62,22 @@ namespace Test
             var primeNumbers = new PrimeNumbers();
             primeNumbers.Game();
         }
+        private static void EfficientPrimeNumbersF()
+        {
+            EffiicentPrimeNumbers.Game();
+        }
         private static void BitConverterF()
         {
             var bitConverter = new MyBitConverter();
             bitConverter.Game();
+        }
+        private static void MeanF()
+        {
+            Mean.Game();
+        }
+        private static void CollatzF()
+        {
+            Collatz.Game();
         }
         private static void StringGameF()
         {
@@ -86,3 +101,5 @@ namespace Test
         }
     }
 }
+
+

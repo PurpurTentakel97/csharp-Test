@@ -11,7 +11,6 @@ namespace Numbers
 {
     internal class PrimeNumbers
     {
-
         public void Game()
         {
 
@@ -56,6 +55,79 @@ namespace Numbers
 
             }
             Console.WriteLine("");
+        }
+    }
+
+    internal class EffiicentPrimeNumbers
+    {
+        public static void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Effiziernt Prim Zahlen Ausgeben");
+
+                ushort n = Helper.GetUshort("Trage ein bis zu welcher Zahl die Primzahlen ausgegeben werden sollen.");
+
+                bool[] array = GetArray(n);
+                array = SetArray(array);
+                PrintArray(array);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private static bool[] GetArray(int n)
+        {
+            bool[] array = new bool[n + 1];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = true;
+            }
+            return array;
+        }
+
+        private static bool[] SetArray(bool[] array)
+        {
+            for (int i = 2; i < array.Length - 1; i++)
+            {
+                if (!array[i])
+                {
+                    continue;
+                }
+
+                for (int j = 2 * i; j <= array.Length - 1; j += i)
+                {
+                    array[j] = false;
+                }
+            }
+            return array;
+        }
+
+        private static void PrintArray(bool[] array)
+        {
+            Console.WriteLine($"Die Primzahlen bis {array.Length - 1} sind:");
+            bool first = true;
+            for (int i = 2; i < array.Length; i++)
+            {
+                if (!array[i])
+                {
+                    continue;
+                }
+
+                if (!first)
+                {
+                    Console.Write(", ");
+                }
+
+                first = false;
+
+                Console.Write(i);
+            }
+            Console.WriteLine();
         }
     }
 
@@ -253,6 +325,106 @@ namespace Numbers
                 bit = (byte)((bit) / 2);
             }
             return ret;
+        }
+    }
+
+    internal class Mean
+    {
+
+        public static void Game()
+        {
+            while (true)
+            {
+                double value = 0.0;
+                int count = 0;
+
+                Helper.PrintHeadline("Arithmetisches Mittel");
+                Console.WriteLine("Gebe nacheinander beliebig viele Zahlen ein.");
+                Console.WriteLine("Beende die Eingabe mit einer 0.");
+
+                GetInput(ref value, ref count);
+
+                Console.WriteLine(count > 0 ? $"Das Mittel ist {value / count}" : "Keine Eingabe erkannt");
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private static void GetInput(ref double value, ref int count)
+        {
+            while (true)
+            {
+                double input = Helper.GetDouble("Gib eine Zahl ein:");
+                if (input <= 0.0)
+                {
+                    break;
+                }
+                value += input;
+                count++;
+            }
+        }
+    }
+
+    internal class Collatz
+    {
+        public static void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Collatz-Problem (1-100)");
+
+                for (int n = 1; n <= 100; n++)
+                {
+                    WoCollatz(n);
+                }
+
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private static void WoCollatz(int n)
+        {
+            bool is1Or2 = false;
+            if (n == 1 || n == 2)
+            {
+                is1Or2 = true;
+            }
+
+            string output = $"n = {n}: ";
+
+            while (true)
+            {
+                if (n == 1)
+                {
+
+                    if (is1Or2)
+                    {
+                        is1Or2 = false;
+                    }
+                    else
+                    {
+                        output += $"{n}";
+                        break;
+                    }
+                }
+                output += $"{n}, ";
+                if (n % 2 == 0)
+                {
+                    n /= 2;
+                }
+                else
+                {
+                    n = n * 3 + 1;
+                }
+            }
+            Console.WriteLine(output);
         }
     }
 }

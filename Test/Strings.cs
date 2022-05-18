@@ -20,6 +20,8 @@ namespace Strings
             ("Liste einlesen ohne Schleife", StringSplitF),
             ("Liste einlesen ohne Schleife und convertiertem Array" ,StringSplitAndConvertF),
             ("Liste einlesen ohne Schleife und convertiertem Array mit Methode", StringSplitAndConvertWithMethodF),
+            ("Passwort checken", ComparePasswordF),
+            ("Palindrom checken", PalindromeF),
         };
         public void Game()
         {
@@ -65,6 +67,16 @@ namespace Strings
         {
             var stringSplitAndConvertWithMethod = new StringSplitAndConvertWithMethod();
             stringSplitAndConvertWithMethod.Game();
+        }
+        private static void ComparePasswordF()
+        {
+            var comparePassword = new ComparePassword();
+            comparePassword.Game();
+        }
+        private static void PalindromeF()
+        {
+            var palindrome = new Palindrome();
+            palindrome.Game();
         }
 
         internal class ReverseString
@@ -339,6 +351,69 @@ namespace Strings
                 Console.WriteLine(toPrint);
             }
         }
-    }
+        internal class ComparePassword
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Passwort checken");
 
+                    string value = Helper.GetString("Gib dein Passwort ein. (Gib 'q' ein um die Eingabe zu abzubrechen):");
+
+                    if (value == "q")
+                    {
+                        break;
+                    }
+
+                    if (IsPassword(value))
+                    {
+                        Console.WriteLine("Zugriff gestattet, richtiges Passwort");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    Console.WriteLine("Zugriff verweigert, Falsches Passwort");
+                    Console.ReadKey();
+                }
+            }
+
+            private bool IsPassword(string value)
+            {
+                return value == "dfg987345";
+            }
+        }
+        internal class Palindrome
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Palindrom checken");
+
+                    string value = Helper.GetString("Gib das Palindrom ein (Gib 'q' ein um die Eingabe zu abzubrechen):");
+
+                    if (value == "q")
+                    {
+                        break;
+                    }
+
+                    Console.WriteLine($"{value} ist {(IsPalindrome(value) ? "ein" : "KEIN")} Palindrom.");
+                    Console.ReadKey();
+                }
+            }
+            private bool IsPalindrome(string value)
+            {
+                for (int left = 0, right = value.Length - 1; left < right; left++, right--)
+                {
+                    if (value[left] != value[right])
+                    {
+                        return false;
+                    }
+
+                }
+                return true;
+            }
+        }
+    }
 }

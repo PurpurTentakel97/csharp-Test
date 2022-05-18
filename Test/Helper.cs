@@ -75,6 +75,23 @@ namespace Helpers
             }
 
         }
+        public static double GetDouble(string text)
+        {
+            while (true)
+            {
+                Console.WriteLine(text);
+                string inputRaw = Console.ReadLine();
+
+                if (!double.TryParse(inputRaw, out double input))
+                {
+                    Console.WriteLine(invalidInput);
+                    continue;
+                }
+
+                return input;
+            }
+
+        }
         public static int GetInt(string text)
         {
             while (true)
@@ -92,7 +109,6 @@ namespace Helpers
             }
 
         }
-
 
 
         public static void PrintHeadline(string name)
