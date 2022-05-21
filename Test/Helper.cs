@@ -110,6 +110,20 @@ namespace Helpers
 
         }
 
+        public static int[] GetRandomIntArray(int min, int max, int count)
+        {
+            var random = new Random();
+            var randomNumbers = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                int randomNumber = random.Next(min, max + 1);
+                randomNumbers[i] = randomNumber;
+            }
+
+            return randomNumbers;
+
+
+        }
 
         public static void PrintHeadline(string name)
         {

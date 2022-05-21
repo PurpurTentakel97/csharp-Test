@@ -427,4 +427,59 @@ namespace Numbers
             Console.WriteLine(output);
         }
     }
+
+    internal class SortNumbers
+    {
+        public static void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Zahlen sortieren");
+
+                int min = Helper.GetInt("Gib die hiedrignste Zahl der Liste ein");
+                int max = Helper.GetInt("Gib die höchste Zahl der Liste ein");
+                int count = Helper.GetInt("Gib die Anzahl der Zahlen ein");
+
+
+                int[] numbers = Helper.GetRandomIntArray(min, max, count);
+
+                SortNumberArray(ref numbers);
+
+                PrintNumberArray(numbers);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+
+            }
+        }
+
+        private static void SortNumberArray(ref int[] numbers)
+        {
+            for (int n = numbers.Length; n > 1; n--)
+            {
+                for (int i = 0; i < n - 1; i++)
+                {
+                    if (numbers[i] > numbers[i + 1])
+                    {
+                        (numbers[i], numbers[i + 1]) = (numbers[i + 1], numbers[i]);
+                    }
+                }
+            }
+        }
+
+        private static void PrintNumberArray(int[] numbers)
+        {
+            Console.WriteLine("Sortierte Liste:");
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.Write($"{numbers[i]}, ");
+            }
+            var cursor = Console.GetCursorPosition();
+            Console.SetCursorPosition(cursor.Left - 2, cursor.Top);
+            Console.WriteLine();
+        }
+    }
 }

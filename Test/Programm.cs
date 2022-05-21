@@ -25,6 +25,7 @@ namespace Test
             ("Zahlen zu Bit convertieren",BitConverterF),
             ("Arithmetischer Mittelwert berechnen",MeanF),
             ("Collatz Problem anzeigen",CollatzF),
+            ("Zahlenliste sortieren",SortNumbersF),
             ("Sätz Spiele",StringGameF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
@@ -78,6 +79,10 @@ namespace Test
         private static void CollatzF()
         {
             Collatz.Game();
+        }
+        private static void SortNumbersF()
+        {
+            SortNumbers.Game();
         }
         private static void StringGameF()
         {
