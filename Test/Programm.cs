@@ -26,6 +26,7 @@ namespace Test
             ("Arithmetischer Mittelwert berechnen",MeanF),
             ("Collatz Problem anzeigen",CollatzF),
             ("Zahlenliste sortieren",SortNumbersF),
+            ("Temperatur",TemperatureF),
             ("Sätz Spiele",StringGameF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
@@ -83,6 +84,10 @@ namespace Test
         private static void SortNumbersF()
         {
             SortNumbers.Game();
+        }
+        private static void TemperatureF()
+        {
+            Temperature.Game();
         }
         private static void StringGameF()
         {

@@ -166,7 +166,7 @@ namespace Dictionaries
                 data.Add(entries.Get(i));
             }
             string fileName = Helper.GetString("Gib den Filenamen an:");
-            string json = JsonSerializer.Serialize(data);
+            string json = JsonSerializer.Serialize(data, new JsonSerializerOptions() { WriteIndented = true });
 
             File.WriteAllText(@$"{fileName}.json", json);
             Console.WriteLine(saved);
@@ -330,7 +330,7 @@ namespace Dictionaries
                 data.Add(entries[key]);
             }
             string fileName = Helper.GetString("Gib den Filenamen an:");
-            string json = JsonSerializer.Serialize(data);
+            string json = JsonSerializer.Serialize(data, new JsonSerializerOptions() { WriteIndented = true });
 
             File.WriteAllText(@$"{fileName}.json", json);
             Console.WriteLine(saved);

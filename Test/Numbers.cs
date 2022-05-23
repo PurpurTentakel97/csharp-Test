@@ -482,4 +482,49 @@ namespace Numbers
             Console.WriteLine();
         }
     }
+
+    internal class Temperature
+    {
+        private static int minTemperature;
+        private static int maxTemperature;
+
+        public static void Game()
+        {
+            Helper.PrintHeadline("Temperatur");
+
+            minTemperature = Helper.GetInt("Gib die minimale Temperatur ein");
+            maxTemperature = Helper.GetInt("Gib die maximale Temperatur ein");
+
+            while (true)
+            {
+                Helper.PrintHeadline("Temperatur");
+
+                int currentTemperature = Helper.GetInt("Gib die aktuelle Teperatur ein");
+                PrintCheckTemperature(currentTemperature);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private static void PrintCheckTemperature(int currentTemperature)
+        {
+            if (currentTemperature < minTemperature)
+            {
+                Console.WriteLine($"Die akruelle Teperatur von {currentTemperature}°C ist unter {minTemperature}°C");
+                return;
+            }
+
+            if (currentTemperature > maxTemperature)
+            {
+                Console.WriteLine($"Die aktuelle Temperatur von {currentTemperature}°C ist über {maxTemperature}°C");
+                return;
+            }
+
+            Console.WriteLine($"Die aktuelle Temperatur von {currentTemperature}°C ist OK");
+        }
+    }
 }
