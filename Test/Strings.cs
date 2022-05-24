@@ -11,7 +11,7 @@ namespace Strings
 {
     internal class StringGame
     {
-        private static Dictionary<string, string> entries = new Dictionary<string, string>();
+        //private static Dictionary<string, string> entries = new Dictionary<string, string>();
         private static (string, Action)[] menueValue = new (string, Action)[]
         {
             ("Sätze umdrehen", ReverseStringF),

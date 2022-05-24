@@ -9,9 +9,80 @@ using Menues;
 
 namespace Numbers
 {
+    internal class NumberGame
+    {
+        private static (string, Action)[] menueValue = new (string, Action)[]
+        {
+            ("Prim Zahlen", PrimeNumbersF),
+            ("Effiziente Prim Zahlen", EfficientPrimeNumbersF),
+            ("Gerade Zahlen", EvenNumbersF),
+            ("Zahlen raten", GuessNumberF),
+            ("Bit Konvberter", MyBitConverterF),
+            ("Durschnitt berechnen", MeanF),
+            ("Collatz-Folge", CollatzF),
+            ("Zahlen sortieren", SortNumbersF),
+            ("Temperatur überprüfen", TemperatureF),
+        };
+
+        public void Game()
+        {
+            Menue menue = new Menue("Zahlen Spiele", menueValue);
+            while (true)
+            {
+                menue.Print();
+                Action action = menue.GetAction();
+                if (action == null)
+                {
+                    break;
+                }
+                action();
+            }
+        }
+
+        private static void PrimeNumbersF()
+        {
+            PrimeNumbers.Game();
+        }
+        private static void EfficientPrimeNumbersF()
+        {
+            EfficentPrimeNumbers.Game();
+        }
+        private static void EvenNumbersF()
+        {
+            var evenNumbers = new EvenNumbers();
+            evenNumbers.Game();
+        }
+        private static void GuessNumberF()
+        {
+            var guessNumbers = new GuessNumber();
+            guessNumbers.Game();
+        }
+        private static void MyBitConverterF()
+        {
+            var myBitConverter = new MyBitConverter();
+            myBitConverter.Game();
+        }
+        private static void MeanF()
+        {
+            Mean.Game();
+        }
+        private static void CollatzF()
+        {
+            Collatz.Game();
+        }
+        private static void SortNumbersF()
+        {
+            SortNumbers.Game();
+        }
+        private static void TemperatureF()
+        {
+            Temperature.Game();
+        }
+    }
+
     internal class PrimeNumbers
     {
-        public void Game()
+        public static void Game()
         {
 
             while (true)
@@ -28,7 +99,7 @@ namespace Numbers
                 }
             }
         }
-        private void PrintPrimeNumbersTillX(ushort maxNumber)
+        private static void PrintPrimeNumbersTillX(ushort maxNumber)
         {
             Helper.PrintHeadline("Prim Zahlen Ausgeben");
 
@@ -58,7 +129,7 @@ namespace Numbers
         }
     }
 
-    internal class EffiicentPrimeNumbers
+    internal class EfficentPrimeNumbers
     {
         public static void Game()
         {
@@ -330,7 +401,6 @@ namespace Numbers
 
     internal class Mean
     {
-
         public static void Game()
         {
             while (true)
@@ -358,7 +428,7 @@ namespace Numbers
             while (true)
             {
                 double input = Helper.GetDouble("Gib eine Zahl ein:");
-                if (input <= 0.0)
+                if (input == 0.0)
                 {
                     break;
                 }

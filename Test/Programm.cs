@@ -18,15 +18,7 @@ namespace Test
         static Menue menue;
         public static (string, Action)[] menueValue = new (string, Action)[]
         {
-            ("Zahlen raten",GuessingNumbersF),
-            ("Gerade zahlen anzeigen",EvenNumbersF),
-            ("Prim Zahlen bis x",PrimeNumbersF),
-            ("Effiziernte-Prim Zahlen bis x",EfficientPrimeNumbersF),
-            ("Zahlen zu Bit convertieren",BitConverterF),
-            ("Arithmetischer Mittelwert berechnen",MeanF),
-            ("Collatz Problem anzeigen",CollatzF),
-            ("Zahlenliste sortieren",SortNumbersF),
-            ("Temperatur",TemperatureF),
+            ("Zahlen Spiele",NumberGameF),
             ("Sätz Spiele",StringGameF),
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
@@ -49,45 +41,10 @@ namespace Test
             Console.WriteLine("closing...");
         }
 
-        private static void GuessingNumbersF()
+        private static void NumberGameF()
         {
-            var guessNumbers = new GuessNumber();
-            guessNumbers.Game();
-        }
-        private static void EvenNumbersF()
-        {
-            var evenNumebrs = new EvenNumbers();
-            evenNumebrs.Game();
-        }
-        private static void PrimeNumbersF()
-        {
-            var primeNumbers = new PrimeNumbers();
-            primeNumbers.Game();
-        }
-        private static void EfficientPrimeNumbersF()
-        {
-            EffiicentPrimeNumbers.Game();
-        }
-        private static void BitConverterF()
-        {
-            var bitConverter = new MyBitConverter();
-            bitConverter.Game();
-        }
-        private static void MeanF()
-        {
-            Mean.Game();
-        }
-        private static void CollatzF()
-        {
-            Collatz.Game();
-        }
-        private static void SortNumbersF()
-        {
-            SortNumbers.Game();
-        }
-        private static void TemperatureF()
-        {
-            Temperature.Game();
+            var numberGame = new NumberGame();
+            numberGame.Game();
         }
         private static void StringGameF()
         {
