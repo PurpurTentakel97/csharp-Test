@@ -22,6 +22,7 @@ namespace Numbers
             ("Collatz-Folge", CollatzF),
             ("Zahlen sortieren", SortNumbersF),
             ("Temperatur überprüfen", TemperatureF),
+            ("Modulo X", ModuloXF),
         };
 
         public void Game()
@@ -77,6 +78,11 @@ namespace Numbers
         private static void TemperatureF()
         {
             Temperature.Game();
+        }
+        private static void ModuloXF()
+        {
+            var moduloX = new ModuloX();
+            moduloX.Game();
         }
     }
 
@@ -595,6 +601,92 @@ namespace Numbers
             }
 
             Console.WriteLine($"Die aktuelle Temperatur von {currentTemperature}°C ist OK");
+        }
+    }
+
+    internal class ModuloX
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Modulo X");
+
+                int[] values = GetValues();
+                List<int> modValues = GetModuloValues(values);
+                Print(modValues, values);
+
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private int[] GetValues()
+        {
+            int min;
+            int max;
+            do
+            {
+                min = Helper.GetInt("Gib die kleinste Zahl ein");
+                max = Helper.GetInt("Gib die größste Zahl ein");
+                if (min >= max)
+                {
+                    Console.WriteLine("Kleine Zahl größer als oder gleich große Zahl. Erneute Eingabe:");
+                }
+            } while (min > max);
+
+            int mod = Helper.GetInt("Gib die Zahl ein, durch die die Zahlen Teilbar sein sollen");
+
+            int[] values = new int[] { min, max, mod };
+
+            return values;
+        }
+
+        private List<int> GetModuloValues(int[] values)
+        {
+            int min = values[0];
+            int max = values[1];
+            int mod = values[2];
+
+            var modValues = new List<int>();
+            for (int i = min; i < max + 1; i++)
+            {
+                if (i % mod == 0)
+                {
+                    modValues.Add(i);
+                }
+            }
+            return modValues;
+        }
+
+        private void Print(List<int> modValues, int[] values)
+        {
+            int min = values[0];
+            int max = values[1];
+            int mod = values[2];
+
+            Console.WriteLine($"Die ganzzahlich durch {mod} teilbaren Zahlen zwischen {min} und {max} sind:");
+            for (int i = 0; i < modValues.Count; i++)
+            {
+                if (i == modValues.Count - 1)
+                {
+                    Console.Write($"{modValues[i]}.");
+                    continue;
+                }
+                if (i == modValues.Count - 2)
+                {
+                    Console.Write($"{modValues[i]} und ");
+                    continue;
+                }
+
+                Console.Write($"{modValues[i]}, ");
+            }
+
+            Console.WriteLine();
         }
     }
 }
