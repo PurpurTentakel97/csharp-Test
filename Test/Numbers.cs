@@ -23,6 +23,9 @@ namespace Numbers
             ("Zahlen sortieren", SortNumbersF),
             ("Temperatur überprüfen", TemperatureF),
             ("Modulo X", ModuloXF),
+            ("Aufsteigende Nummer Sequenz", SeqienceOfNumebrsF),
+            ("Aufsteigende Nummer Sequenz 2", SeqienceOfNumebrs2F),
+            ("Quadratzahlen", SquareNumbersF),
         };
 
         public void Game()
@@ -83,6 +86,22 @@ namespace Numbers
         {
             var moduloX = new ModuloX();
             moduloX.Game();
+        }
+        private static void SeqienceOfNumebrsF()
+        {
+            var seqienceOfNumebrs = new SeqienceOfNumebrs();
+            seqienceOfNumebrs.Game();
+        }
+        private static void SeqienceOfNumebrs2F()
+        {
+            var seqienceOfNumebrs2 = new SeqienceOfNumebrs2();
+            seqienceOfNumebrs2.Game();
+        }
+        private static void SquareNumbersF()
+        {
+            var squareNumbers = new SquareNumbers();
+            squareNumbers.Game();
+
         }
     }
 
@@ -686,6 +705,140 @@ namespace Numbers
                 Console.Write($"{modValues[i]}, ");
             }
 
+            Console.WriteLine();
+        }
+    }
+
+    internal class SeqienceOfNumebrs
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Aufsteigende Nummer Sequenz");
+
+                int n = Helper.GetInt("Wie viele Nummern sollen ausgegeben werden?");
+
+                Print(n);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void Print(int n)
+        {
+            Console.WriteLine();
+            int count = 1;
+            Console.WriteLine();
+
+            for (int i = 1; i < n + 1; i++)
+            {
+                var position = Console.GetCursorPosition();
+
+                Console.SetCursorPosition(position.Left, position.Top - 1);
+                Console.Write($"{count}  ");
+
+                position = Console.GetCursorPosition();
+
+                Console.SetCursorPosition(position.Left, position.Top + 1);
+
+                Console.Write($"{i}  ");
+                count += i;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+    }
+
+    internal class SeqienceOfNumebrs2
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Aufsteigende Nummer Sequenz");
+
+                int min = Helper.GetInt("Gib die niedrigste Zahl ein");
+                int max = Helper.GetInt("Gib die höchste Zahl ein");
+                int step = Helper.GetInt("Gib ein alle wie viele Zahlen 100 addiert werden soll");
+
+                Print(min, max, step);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private void Print(int min, int max, int step)
+        {
+            for (int i = min; i <= max; i++)
+            {
+                if (i % step == 0)
+                {
+                    Console.Write($"{i + 100}, ");
+                    continue;
+                }
+
+                Console.Write($"{i}, ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    internal class SquareNumbers
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Quadratzahlen");
+
+                int min = Helper.GetInt("Gib die niedrigste Zahl ein");
+                int max = Helper.GetInt("Gib die höchste Zahl ein");
+
+                if (min > max)
+                {
+                    (min, max) = (max, min);
+                }
+
+                Print(min, max);
+
+
+                string quitCondition = Helper.GetQuitInput();
+                if (quitCondition == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void Print(int min, int max)
+        {
+            int sum = 0;
+            int maxILength = max.ToString().Length;
+            int maxSquareLength = (max * max).ToString().Length;
+
+            Console.WriteLine();
+            for (int i = min; i < max + 1; i++)
+            {
+                int squared = i * i;
+                sum += squared;
+
+                string iOut = i.ToString().PadLeft(maxILength + 2);
+                string squaredOut = squared.ToString().PadLeft(maxSquareLength);
+                Console.WriteLine($"{iOut}   {squaredOut}");
+
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Sie Summe der Quadratzahlen zwischen {min} und {max} ist {sum}.");
             Console.WriteLine();
         }
     }
