@@ -28,6 +28,7 @@ namespace Numbers
             ("Quadratzahlen", SquareNumbersF),
             ("Mitternachtsformel", MidnightFormulaF),
             ("Rechner", CalculateF),
+            ("Addieren", AddF),
         };
 
         public void Game()
@@ -115,6 +116,11 @@ namespace Numbers
             var calculate = new Calculate();
             calculate.Game();
         }
+        private static void AddF()
+        {
+            var add = new Add();
+            add.Game();
+        }
     }
 
     internal class PrimeNumbers
@@ -165,7 +171,6 @@ namespace Numbers
             Console.WriteLine("");
         }
     }
-
     internal class EfficentPrimeNumbers
     {
         public static void Game()
@@ -238,7 +243,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class EvenNumbers
     {
         private static (string, Action)[] menueValue = new (string, Action)[]
@@ -331,7 +335,6 @@ namespace Numbers
         }
 
     }
-
     internal class GuessNumber
     {
         private byte correctNumber;
@@ -395,7 +398,6 @@ namespace Numbers
 
         }
     }
-
     internal class MyBitConverter
     {
         public void Game()
@@ -435,7 +437,6 @@ namespace Numbers
             return ret;
         }
     }
-
     internal class Mean
     {
         public static void Game()
@@ -474,7 +475,6 @@ namespace Numbers
             }
         }
     }
-
     internal class Collatz
     {
         public static void Game()
@@ -534,7 +534,6 @@ namespace Numbers
             Console.WriteLine(output);
         }
     }
-
     internal class SortNumbers
     {
         public static void Game()
@@ -589,7 +588,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class Temperature
     {
         private static int minTemperature;
@@ -634,7 +632,6 @@ namespace Numbers
             Console.WriteLine($"Die aktuelle Temperatur von {currentTemperature}°C ist OK");
         }
     }
-
     internal class ModuloX
     {
         public void Game()
@@ -720,7 +717,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class SeqienceOfNumebrs
     {
         public void Game()
@@ -766,7 +762,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class SeqienceOfNumebrs2
     {
         public void Game()
@@ -803,7 +798,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class SquareNumbers
     {
         public void Game()
@@ -854,7 +848,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class MidnightFormula
     {
         private double a = 0.0;
@@ -951,7 +944,6 @@ namespace Numbers
             Console.WriteLine();
         }
     }
-
     internal class Calculate
     {
         public void Game()
@@ -962,10 +954,11 @@ namespace Numbers
 
                 float value1 = Helper.GetFloat("Gib die erste Zahl ein");
                 string operation;
+                var operators = new string[] { "+", "-", "*", "/" };
                 while (true)
                 {
-                    operation = Helper.GetString("Gib die Rechenart ein. (+,-,*,/)");
-                    if (new string[] { "+", "-", "*", "/" }.Contains(operation))
+                    operation = Helper.GetString($"Gib die Rechenart ein. ({string.Join(",", operators)})");
+                    if (operators.Contains(operation))
                     {
                         break;
                     }
@@ -1026,6 +1019,61 @@ namespace Numbers
         private void Print(float result, float value1, string operation, float value2)
         {
             Console.WriteLine($"{value1} {operation} {value2} = {result}");
+        }
+    }
+    internal class Add
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Addieren");
+
+                int vlaue1 = Helper.GetInt("Gib eine Zahl ein");
+                int vlaue2 = Helper.GetInt("Gib eine Zahl ein");
+
+                int result = Calculate(vlaue1, vlaue2, 0);
+
+                Print(vlaue1, vlaue2, result);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private int Calculate(int value1, int value2, int counter)
+        {
+            ++counter;
+            if (counter >= 100000000)
+            {
+                Console.WriteLine("Overflow");
+                return 0;
+            }
+            int result = 0;
+            if (value2 == 0)
+            {
+                result = value1;
+            }
+            else if (value2 < 0)
+            {
+                --value1;
+                ++value2;
+                result = Calculate(value1, value2, counter);
+            }
+            else if (value2 > 0)
+            {
+                ++value1;
+                --value2;
+                result = Calculate(value1, value2, counter);
+            }
+            return result;
+        }
+        private void Print(int value1, int value2, int result)
+        {
+            Console.WriteLine($"{value1} + {value2} = {result}");
         }
     }
 }
