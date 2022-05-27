@@ -26,6 +26,7 @@ namespace Numbers
             ("Aufsteigende Nummer Sequenz", SeqienceOfNumebrsF),
             ("Aufsteigende Nummer Sequenz 2", SeqienceOfNumebrs2F),
             ("Quadratzahlen", SquareNumbersF),
+            ("Mitternachtsformel", MidnightFormulaF),
         };
 
         public void Game()
@@ -102,6 +103,11 @@ namespace Numbers
             var squareNumbers = new SquareNumbers();
             squareNumbers.Game();
 
+        }
+        private static void MidnightFormulaF()
+        {
+            var midnightFormula = new MidnightFormula();
+            midnightFormula.Game();
         }
     }
 
@@ -839,6 +845,103 @@ namespace Numbers
 
             Console.WriteLine();
             Console.WriteLine($"Sie Summe der Quadratzahlen zwischen {min} und {max} ist {sum}.");
+            Console.WriteLine();
+        }
+    }
+
+    internal class MidnightFormula
+    {
+        private double a = 0.0;
+        private double b = 0.0;
+        private double c = 0.0;
+
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Mitternachtsformel");
+
+                PrintTask();
+
+                a = Helper.GetDouble("a = ?");
+                b = Helper.GetDouble("b = ?");
+                c = Helper.GetDouble("c = ?");
+
+                double D = CalculateDiscriminant(a, b, c);
+                Console.WriteLine(D);
+                int solutionCount = GetSoultionCount(D);
+                Console.WriteLine(solutionCount);
+
+                double? x1 = null;
+                if (solutionCount >= 0)
+                {
+                    x1 = GetFirstSolution(D, a, b);
+                }
+
+                double? x2 = null;
+                if (solutionCount > 0)
+                {
+                    x2 = GetSecondSolution(D, a, b);
+                }
+
+                Print(solutionCount, x1, x2);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void PrintTask()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Rechner für quatische Gleichungen vpm Typ:");
+            Console.WriteLine("( 0 = ax^2 + bx +  c )");
+            Console.WriteLine();
+            Console.WriteLine("Folgende Koeffizienten eingeben:");
+        }
+        private double CalculateDiscriminant(double a, double b, double c)
+        {
+            return (b * b) - (4 * a * c);
+        }
+        private int GetSoultionCount(double D)
+        {
+            if (D < 0)
+            {
+                return 0;
+            }
+
+            if (D > 0)
+            {
+                return 2;
+            }
+
+            return 1;
+        }
+        private double GetFirstSolution(double D, double a, double b)
+        {
+            return (-b + Math.Sqrt(D) / (2 * a));
+        }
+        private double GetSecondSolution(double D, double a, double b)
+        {
+            return (-b - Math.Sqrt(D) / (2 * a));
+        }
+        private void Print(int solutionCout, double? x1, double? x2)
+        {
+            if (solutionCout == 0)
+            {
+                Console.WriteLine("Keine Lösung vorhanden");
+            }
+            if (solutionCout == 1)
+            {
+                Console.WriteLine($"x = {x1}");
+            }
+            if (solutionCout == 2)
+            {
+                Console.WriteLine($"x1 = {x1}, x2 = {x2}");
+            }
             Console.WriteLine();
         }
     }
