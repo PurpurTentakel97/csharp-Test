@@ -27,6 +27,7 @@ namespace Numbers
             ("Aufsteigende Nummer Sequenz 2", SeqienceOfNumebrs2F),
             ("Quadratzahlen", SquareNumbersF),
             ("Mitternachtsformel", MidnightFormulaF),
+            ("Rechner", CalculateF),
         };
 
         public void Game()
@@ -108,6 +109,11 @@ namespace Numbers
         {
             var midnightFormula = new MidnightFormula();
             midnightFormula.Game();
+        }
+        private static void CalculateF()
+        {
+            var calculate = new Calculate();
+            calculate.Game();
         }
     }
 
@@ -943,6 +949,83 @@ namespace Numbers
                 Console.WriteLine($"x1 = {x1}, x2 = {x2}");
             }
             Console.WriteLine();
+        }
+    }
+
+    internal class Calculate
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Rechner");
+
+                float value1 = Helper.GetFloat("Gib die erste Zahl ein");
+                string operation;
+                while (true)
+                {
+                    operation = Helper.GetString("Gib die Rechenart ein. (+,-,*,/)");
+                    if (new string[] { "+", "-", "*", "/" }.Contains(operation))
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Invalider Input");
+                }
+                float value2 = Helper.GetFloat("Gib die zweite Zahl ein");
+
+                float result = Calculation(value1, operation, value2);
+
+                Print(result, value1, operation, value2);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private float Calculation(float value1, string operation, float value2)
+        {
+            switch (operation)
+            {
+                case "+":
+                    return Add(value1, value2);
+                case "-":
+                    return Substract(value1, value2);
+                case "*":
+                    return Multiply(value1, value2);
+                case "/":
+                    return Divide(value1, value2);
+            }
+            return 0f;
+        }
+
+        private float Add(float value1, float value2)
+        {
+            return value1 + value2;
+        }
+        private float Substract(float value1, float value2)
+        {
+            return value1 - value2;
+        }
+        private float Multiply(float value1, float value2)
+        {
+            return value1 * value2;
+        }
+        private float Divide(float value1, float value2)
+        {
+            if (value2 == 0f)
+            {
+                Console.WriteLine("Bevide by Zero");
+                return 0f;
+            }
+            return value1 / value2;
+        }
+
+        private void Print(float result, float value1, string operation, float value2)
+        {
+            Console.WriteLine($"{value1} {operation} {value2} = {result}");
         }
     }
 }

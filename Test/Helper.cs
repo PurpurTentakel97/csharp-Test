@@ -92,6 +92,23 @@ namespace Helpers
             }
 
         }
+        public static float GetFloat(string text)
+        {
+            while (true)
+            {
+                Console.WriteLine(text);
+                string inputRaw = Console.ReadLine();
+
+                if (!float.TryParse(inputRaw, out float input))
+                {
+                    Console.WriteLine(invalidInput);
+                    continue;
+                }
+
+                return input;
+            }
+
+        }
         public static int GetInt(string text)
         {
             while (true)
