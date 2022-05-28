@@ -29,6 +29,7 @@ namespace Numbers
             ("Mitternachtsformel", MidnightFormulaF),
             ("Rechner", CalculateF),
             ("Addieren", AddF),
+            ("Fibonacci", FibonacciF),
         };
 
         public void Game()
@@ -120,6 +121,11 @@ namespace Numbers
         {
             var add = new Add();
             add.Game();
+        }
+        private static void FibonacciF()
+        {
+            var fibonacci = new Fibonacci();
+            fibonacci.Game();
         }
     }
 
@@ -1047,7 +1053,7 @@ namespace Numbers
         private int Calculate(int value1, int value2, int counter)
         {
             ++counter;
-            if (counter >= 100000000)
+            if (counter >= int.MaxValue - 500)
             {
                 Console.WriteLine("Overflow");
                 return 0;
@@ -1074,6 +1080,52 @@ namespace Numbers
         private void Print(int value1, int value2, int result)
         {
             Console.WriteLine($"{value1} + {value2} = {result}");
+        }
+    }
+    internal class Fibonacci
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Pibonacci");
+
+                int N;
+                while (true)
+                {
+                    N = Helper.GetInt("Gib ein, welche Zahl der Folge ausgegeben werden soll");
+                    if (N > 0)
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Invalider Input");
+                }
+                int result = GetFinonacciAtN(0, 1, N, 1);
+                Print(N, result);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private int GetFinonacciAtN(int F1, int F2, int N, int counter)
+        {
+            if (N == counter)
+            {
+                return F1;
+            }
+            ++counter;
+            var temp = F2;
+            F2 = F1 + F2;
+            F1 = temp;
+            return GetFinonacciAtN(F1, F2, N, counter);
+        }
+
+        private void Print(int N, int result)
+        {
+            Console.WriteLine($"Das {N}. Element der Fibonacci-Folge ist {result}");
         }
     }
 }

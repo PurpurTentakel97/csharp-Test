@@ -21,6 +21,7 @@ namespace Strings
             ("Liste einlesen ohne Schleife und convertiertem Array mit Methode", StringSplitAndConvertWithMethodF),
             ("Passwort checken", ComparePasswordF),
             ("Palindrom checken", PalindromeF),
+            ("Palindrom2 checken", Palindrom2F),
             ("Andreaskreuz", CrossF),
             ("Fahne", unionJack),
         };
@@ -88,6 +89,11 @@ namespace Strings
         {
             var junionJack = new UnionJack();
             junionJack.Game();
+        }
+        private static void Palindrom2F()
+        {
+            var palindrom2 = new Palindrom2();
+            palindrom2.Game();
         }
     }
     internal class ReverseString
@@ -424,6 +430,51 @@ namespace Strings
 
             }
             return true;
+        }
+    }
+    internal class Palindrom2
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Palindrom2");
+
+                char[] palindrome = Helper.GetString("Gib das Palindrome ein").ToArray();
+                bool result = IsPalindrome(palindrome, 0);
+                Print(result);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private bool IsPalindrome(char[] palindrome, int index)
+        {
+            if (index > palindrome.Length / 2)
+            {
+                return true;
+            }
+            if (palindrome[index] != palindrome[palindrome.Length - 1 - index])
+            {
+                return false;
+            }
+            ++index;
+            return IsPalindrome(palindrome, index);
+        }
+        private void Print(bool result)
+        {
+            if (result)
+            {
+                Console.WriteLine("Das Wort ist ein Palindrom");
+            }
+            else
+            {
+                Console.WriteLine("Das Wort ist kein Palindrom");
+            }
         }
     }
     internal class Cross
