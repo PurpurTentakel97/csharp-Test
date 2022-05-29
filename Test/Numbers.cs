@@ -1038,7 +1038,7 @@ namespace Numbers
                 int vlaue1 = Helper.GetInt("Gib eine Zahl ein");
                 int vlaue2 = Helper.GetInt("Gib eine Zahl ein");
 
-                int result = Calculate(vlaue1, vlaue2, 0);
+                int result = Calculate(vlaue1, vlaue2);
 
                 Print(vlaue1, vlaue2, result);
 
@@ -1050,14 +1050,8 @@ namespace Numbers
             }
         }
 
-        private int Calculate(int value1, int value2, int counter)
+        private int Calculate(int value1, int value2)
         {
-            ++counter;
-            if (counter >= int.MaxValue - 500)
-            {
-                Console.WriteLine("Overflow");
-                return 0;
-            }
             int result = 0;
             if (value2 == 0)
             {
@@ -1065,15 +1059,11 @@ namespace Numbers
             }
             else if (value2 < 0)
             {
-                --value1;
-                ++value2;
-                result = Calculate(value1, value2, counter);
+                result = Calculate(value1 - 1, value2 + 1);
             }
             else if (value2 > 0)
             {
-                ++value1;
-                --value2;
-                result = Calculate(value1, value2, counter);
+                result = Calculate(value1 + 1, value2 - 1);
             }
             return result;
         }
@@ -1112,14 +1102,14 @@ namespace Numbers
         }
         private int GetFinonacciAtN(int F1, int F2, int N, int counter)
         {
-            if (N == counter)
+            if (N <= counter)
             {
                 return F1;
             }
-            ++counter;
             var temp = F2;
             F2 = F1 + F2;
             F1 = temp;
+            ++counter;
             return GetFinonacciAtN(F1, F2, N, counter);
         }
 
