@@ -30,6 +30,13 @@ namespace Numbers
             ("Rechner", CalculateF),
             ("Addieren", AddF),
             ("Fibonacci", FibonacciF),
+            ("Addiere 1", Add1F),
+            ("Gerade Zahlen aus Array", EvenArrayNumbersF),
+            ("Würfelwürfe", DiceF),
+            ("Min", MinNumbersF),
+            ("Max", MaxNumberRecursiveF),
+            ("Flip Array", FlipArrayF),
+            ("Flip Array Rekursiv", FlipArrayRecursiveF),
         };
 
         public void Game()
@@ -126,6 +133,41 @@ namespace Numbers
         {
             var fibonacci = new Fibonacci();
             fibonacci.Game();
+        }
+        private static void Add1F()
+        {
+            var add1 = new Add1();
+            add1.Game();
+        }
+        private static void EvenArrayNumbersF()
+        {
+            var evenArrayNumbers = new EvenArrayNumbers();
+            evenArrayNumbers.Game();
+        }
+        private static void DiceF()
+        {
+            var dice = new Dice();
+            dice.Game();
+        }
+        private static void MinNumbersF()
+        {
+            var minNumbers = new MinNumbers();
+            minNumbers.Game();
+        }
+        private static void MaxNumberRecursiveF()
+        {
+            var maxNumberRecursive = new MaxNumberRecursive();
+            maxNumberRecursive.Game();
+        }
+        private static void FlipArrayF()
+        {
+            var flipArray = new FlipArray();
+            flipArray.Game();
+        }
+        private static void FlipArrayRecursiveF()
+        {
+            var flipArrayRecursive = new FlipArrayRecursive();
+            flipArrayRecursive.Game();
         }
     }
 
@@ -1059,11 +1101,15 @@ namespace Numbers
             }
             else if (value2 < 0)
             {
-                result = Calculate(value1 - 1, value2 + 1);
+                --value1;
+                ++value2;
+                result = Calculate(value1, value2);
             }
             else if (value2 > 0)
             {
-                result = Calculate(value1 + 1, value2 - 1);
+                ++value1;
+                --value2;
+                result = Calculate(value1, value2);
             }
             return result;
         }
@@ -1078,7 +1124,7 @@ namespace Numbers
         {
             while (true)
             {
-                Helper.PrintHeadline("Pibonacci");
+                Helper.PrintHeadline("Fibonacci");
 
                 int N;
                 while (true)
@@ -1090,7 +1136,7 @@ namespace Numbers
                     }
                     Console.WriteLine("Invalider Input");
                 }
-                int result = GetFinonacciAtN(0, 1, N, 1);
+                int result = GetFibonacciAtN(N);
                 Print(N, result);
 
                 string quitInput = Helper.GetQuitInput();
@@ -1100,22 +1146,436 @@ namespace Numbers
                 }
             }
         }
-        private int GetFinonacciAtN(int F1, int F2, int N, int counter)
+        private int GetFibonacciAtN(int N)
         {
-            if (N <= counter)
+            /*
+             * [0] = 1
+             * [1] = 1
+             * [2] = [0] + [1]
+             * [3] = [1] + [2]
+             * [4] = [2] + [3]
+             * [5] = [3] + [4]
+             */
+
+            if (N == 1 || N == 2)
             {
-                return F1;
+                return 1;
             }
-            var temp = F2;
-            F2 = F1 + F2;
-            F1 = temp;
-            ++counter;
-            return GetFinonacciAtN(F1, F2, N, counter);
+
+            return GetFibonacciAtN(N - 1) + GetFibonacciAtN(N - 2);
+
         }
 
         private void Print(int N, int result)
         {
             Console.WriteLine($"Das {N}. Element der Fibonacci-Folge ist {result}");
+        }
+    }
+    internal class Add1
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Addiere 1");
+
+                Console.WriteLine();
+                AddA(0);
+                Console.WriteLine("-----");
+                AddB(0);
+                Console.WriteLine();
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void AddA(int x)
+        {
+            if (x >= 10)
+            {
+                return;
+            }
+
+            Console.WriteLine($"A: {x}");
+
+            AddA(x + 1);
+        }
+        private void AddB(int x)
+        {
+            if (x >= 10)
+            {
+                return;
+            }
+
+            AddB(x + 1);
+
+            Console.WriteLine($"B: {x}");
+        }
+    }
+    internal class EvenArrayNumbers
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("For Each 02");
+
+                int min = Helper.GetInt("Gib die kleinste Zahl ein");
+                int max = Helper.GetInt("Gib die größte Zahl ein");
+                int n = Helper.GetInt("Gib die Anzahl der Zahlen ein");
+
+                int[] randomNumbers = Helper.GetRandomIntArray(min, max, n);
+
+                EvenPrint(randomNumbers);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void EvenPrint(int[] randomNumbers)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Gerade Zahlen:");
+            foreach (int number in randomNumbers)
+            {
+                if (number % 2 == 0)
+                {
+                    Console.WriteLine(number);
+                }
+            }
+            Console.WriteLine();
+        }
+    }
+    internal class Dice
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Würfel");
+
+                (int min, int max) = GetBorders();
+                bool simulate = Helper.GetInt("Mochtest du die Würfe simuliert werden? 0 == Ja") == 0;
+
+                int[] diceRolls = GetDiceRolls(min, max, simulate);
+                Print(diceRolls, min);
+
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private (int, int) GetBorders()
+        {
+            int min, max;
+            do
+            {
+                min = Helper.GetInt("Gib den kleinsten möglichen Würfelwert ein");
+                max = Helper.GetInt("Gib den größten möglichen Würfelwert ein");
+            } while (min <= 0 || max <= 0);
+
+            if (min > max)
+            {
+                (min, max) = (max, min);
+            }
+
+            return (min, max);
+        }
+        private int[] GetDiceRolls(int min, int max, bool simulate)
+        {
+            var rolls = new int[max];
+            if (simulate)
+            {
+                int[] rawRolls = Helper.GetRandomIntArray(min, max, 1000);
+                foreach (int roll in rawRolls)
+                {
+                    ++rolls[roll - 1];
+                }
+                return rolls;
+            }
+
+            Console.WriteLine("Gib die Zahlen ein. Beende deine Eingabe außerhalb den Eingabebereiches");
+            int input;
+            do
+            {
+                input = Helper.GetInt("Gib den Würfelwurf ein");
+
+                if (input >= min && input <= max)
+                {
+                    ++rolls[input - 1];
+                }
+
+            } while (input >= min && input <= max);
+
+            return rolls;
+        }
+        private void Print(int[] diceRolls, int min)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Das Ergebnis:");
+            Console.WriteLine();
+
+            int diceEyes = 0;
+            int rollCount = 0;
+            for (int i = min - 1; i < diceRolls.Length; ++i)
+            {
+                Console.WriteLine($"{i + 1}: {diceRolls[i]}");
+                diceEyes += diceRolls[i] * (i + 1);
+                rollCount += diceRolls[i];
+            }
+            Console.WriteLine($"Durchscnittlicher Wert: {(double)diceEyes / (double)rollCount}");
+            Console.WriteLine();
+        }
+    }
+    internal class MinNumbers
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Min");
+
+                Console.WriteLine($"4, 6 -> {Min(4, 6)}");
+                Console.WriteLine($"6f, 4f -> {Min(6f, 4f)}");
+                Console.WriteLine($"6d, 4d -> {Min(6d, 4d)}");
+                Console.WriteLine($"42, 27d -> {Min(42, 27d)}");
+
+                Console.WriteLine($"7, 4, 9 -> {Min(7, 4, 9)}");
+                Console.WriteLine($"7f, 4f, 9f -> {Min(7f, 4f, 9f)}");
+                Console.WriteLine($"7d, 4d, 9d -> {Min(7d, 4d, 9d)}");
+
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private int Min(int v1, int v2)
+        {
+            return v1 < v2 ? v1 : v2;
+        }
+        private float Min(float v1, float v2)
+        {
+            return v1 < v2 ? v1 : v2;
+        }
+        private double Min(double v1, double v2)
+        {
+            return v1 < v2 ? v1 : v2;
+        }
+        private int Min(int v1, int v2, int v3)
+        {
+            int temp = Min(v1, v2);
+            return Min(temp, v3);
+        }
+        private float Min(float v1, float v2, float v3)
+        {
+            float temp = Min(v1, v2);
+            return Min(temp, v3);
+        }
+        private double Min(double v1, double v2, double v3)
+        {
+            double temp = Min(v1, v2);
+            return Min(temp, v3);
+        }
+    }
+    internal class MaxNumberRecursive
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Max Rekursion");
+
+                int[] randomNumbers = Helper.GetRandomIntArray(0, 100, 20);
+                int maxValue = Max(randomNumbers);
+                Print(randomNumbers, maxValue);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private int Max(int[] randomNumbers)
+        {
+            if (randomNumbers.Length == 1)
+            {
+                return randomNumbers[0];
+            }
+
+            int value2 = Max(Slice(randomNumbers, 1, randomNumbers.Length));
+            int value1 = randomNumbers[0];
+
+            return value1 > value2 ? value1 : value2;
+        }
+        private int[] Slice(int[] before, int min, int max)
+        {
+            var after = new int[max - min];
+            for (int i = 0; i < after.Length; i++)
+            {
+                after[i] = before[i + min];
+            }
+            return after;
+        }
+        private void Print(int[] randomNumbers, int maxValue)
+        {
+            Console.WriteLine($"Max Value: {maxValue}");
+            Console.WriteLine("Array:");
+            foreach (int number in randomNumbers)
+            {
+                Console.WriteLine(number);
+            }
+            Console.WriteLine();
+        }
+    }
+    internal class FlipArray
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Array umdrehen");
+
+                var even = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                Print(even);
+                Flip(even);
+                Print(even);
+
+                var odd = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                Print(odd);
+                Flip(odd);
+                Print(odd);
+
+                var one = new int[] { 1 };
+                Print(one);
+                Flip(one);
+                Print(one);
+
+                var two = new int[] { 1, 2 };
+                Print(two);
+                Flip(two);
+                Print(two);
+
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private void Flip(int[] array)
+        {
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                (array[i], array[array.Length - 1 - i]) = (array[array.Length - 1 - i], array[i]);
+            }
+        }
+        private void Print(int[] array)
+        {
+            foreach (int i in array)
+            {
+                Console.Write($"{i}, ");
+            }
+            Console.WriteLine();
+        }
+    }
+    internal class FlipArrayRecursive
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Array umdrehen");
+
+                var even = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                Print(even);
+                even = Flip2(even);
+                Print(even);
+
+                var odd = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                Print(odd);
+                odd = Flip2(odd);
+                Print(odd);
+
+                var one = new int[] { 1 };
+                Print(one);
+                one = Flip2(one);
+                Print(one);
+
+                var two = new int[] { 1, 2 };
+                Print(two);
+                two = Flip2(two);
+                Print(two);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private void Flip(int[] array, int index = 0)
+        {
+            if (index >= array.Length / 2)
+            {
+                return;
+            }
+
+            Flip(array, index + 1);
+            (array[index], array[array.Length - index - 1]) = (array[array.Length - index - 1], array[index]);
+
+        }
+        private int[] Flip2(int[] array)
+        {
+            if (array.Length <= 1)
+            {
+                return array;
+            }
+
+            (array[0], array[array.Length - 1]) = (array[array.Length - 1], array[0]);
+
+            int[] dummy = Flip2(Slice(array, 1, array.Length - 1));
+
+            for (int i = 0; i < dummy.Length; i++)
+            {
+                array[i + 1] = dummy[i];
+            }
+
+            return array;
+
+        }
+        private int[] Slice(int[] before, int min, int max)
+        {
+            var after = new int[max - min];
+            for (int i = 0; i < after.Length; i++)
+            {
+                after[i] = before[i + min];
+            }
+            return after;
+        }
+        private void Print(int[] array)
+        {
+            foreach (int i in array)
+            {
+                Console.Write($"{i}, ");
+            }
+            Console.WriteLine();
         }
     }
 }

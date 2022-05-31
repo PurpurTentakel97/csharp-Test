@@ -23,7 +23,8 @@ namespace Strings
             ("Palindrom checken", PalindromeF),
             ("Palindrom2 checken", Palindrom2F),
             ("Andreaskreuz", CrossF),
-            ("Fahne", unionJack),
+            ("Fahne", UnionJackF),
+            ("Fisch im Koihaufen", ContainsSubstringF),
         };
         public void Game()
         {
@@ -85,7 +86,7 @@ namespace Strings
             var cross = new Cross();
             cross.Game();
         }
-        private static void unionJack()
+        private static void UnionJackF()
         {
             var junionJack = new UnionJack();
             junionJack.Game();
@@ -94,6 +95,11 @@ namespace Strings
         {
             var palindrom2 = new Palindrom2();
             palindrom2.Game();
+        }
+        private static void ContainsSubstringF()
+        {
+            var containsSubstring = new ContainsSubstring();
+            containsSubstring.Game();
         }
     }
     internal class ReverseString
@@ -601,5 +607,70 @@ namespace Strings
             Console.WriteLine();
         }
     }
+    internal class ContainsSubstring
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Nadel im Koihaufen");
 
+                string hayStack = Helper.GetString("Gib den Koihaufen ein");
+                string needle = Helper.GetString("Gib die Nadel ein");
+
+                bool isInHayStack = IsInHayStack(hayStack, needle);
+                Print(hayStack, needle, isInHayStack);
+
+                string quitInput = Helper.GetQuitInput();
+                if (quitInput == "q")
+                {
+                    break;
+                }
+            }
+        }
+        private bool IsInHayStack(string haystack, string needle)
+        {
+            if (needle == "")
+            {
+                return true;
+            }
+            for (int i = 0; i < haystack.Length - needle.Length + 1; i++)
+            {
+                if (haystack[i] == needle[0])
+                {
+                    if (CheckNeedle(haystack, needle, i))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        private bool CheckNeedle(string haystack, string needle, int addIndex)
+        {
+            for (int i = 1; i < needle.Length; i++)
+            {
+                if (needle[i] != haystack[i + addIndex])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private void Print(string hayStack, string needle, bool isInHayStack)
+        {
+            Console.WriteLine();
+
+            if (isInHayStack)
+            {
+                Console.WriteLine($"Der Fisch {needle} ist im Koihaufen {hayStack}");
+            }
+            else
+            {
+                Console.WriteLine($"Der Fisch {needle} hat sich nicht in den Koihaufen {hayStack} verirrt.");
+            }
+
+            Console.WriteLine();
+        }
+    }
 }
