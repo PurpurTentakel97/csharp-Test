@@ -142,6 +142,14 @@ namespace Helpers
 
         }
 
+        public static void FlipInt(ref int x)
+        {
+            if (x < 0)
+            {
+                x = x * -1;
+            }
+        }
+
         public static void PrintHeadline(string name)
         {
             Console.Clear();

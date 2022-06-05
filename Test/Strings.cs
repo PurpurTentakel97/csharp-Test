@@ -25,6 +25,7 @@ namespace Strings
             ("Andreaskreuz", CrossF),
             ("Fahne", UnionJackF),
             ("Fisch im Koihaufen", ContainsSubstringF),
+            ("Schweinegatter", SchweinegatterF),
         };
         public void Game()
         {
@@ -100,6 +101,11 @@ namespace Strings
         {
             var containsSubstring = new ContainsSubstring();
             containsSubstring.Game();
+        }
+        private static void SchweinegatterF()
+        {
+            var chweinegatter = new Schweinegatter();
+            chweinegatter.Game();
         }
     }
     internal class ReverseString
@@ -671,6 +677,462 @@ namespace Strings
             }
 
             Console.WriteLine();
+        }
+    }
+    internal class Schweinegatter
+    {
+        private static (string, Action)[] menuValues = new (string, Action)[]
+        {
+            ("Tabelle",TableF),
+            ("Rechteck",RectangleF),
+            ("Bilderrahmen",PhotoFrameF),
+            ("Viele Bilderrahmen Vertikal",MultiplePhotoFrameVerticalF),
+            ("Viele Bilderrahmen Hoprizontal",MultiplePhotoFrameHorizontalF),
+            ("Viele Bilderrahmen Rechteck",MultiplePhotoFrameRectangldeF),
+        };
+
+        public void Game()
+        {
+            var menue = new Menue("Schweinegatter", menuValues);
+            while (true)
+            {
+                menue.Print();
+                Action action = menue.GetAction();
+                if (action == null)
+                {
+                    break;
+                }
+                action();
+            }
+        }
+
+        private static void TableF()
+        {
+            var table = new Table();
+            table.Game();
+        }
+        private static void RectangleF()
+        {
+            var square = new Rectangle();
+            square.Game();
+        }
+        private static void PhotoFrameF()
+        {
+            var photoFrame = new PhotoFrame();
+            photoFrame.Game();
+        }
+        private static void MultiplePhotoFrameVerticalF()
+        {
+            var multiplePhotoFrame = new MultiplePhotoFrameVertical();
+            multiplePhotoFrame.Game();
+        }
+        private static void MultiplePhotoFrameHorizontalF()
+        {
+            var multiplePhotoFrameHorizontal = new MultiplePhotoFrameHorizontal();
+            multiplePhotoFrameHorizontal.Game();
+        }
+        private static void MultiplePhotoFrameRectangldeF()
+        {
+            var multiplePhotoFrameRectanglde = new MultiplePhotoFrameRectanglde();
+            multiplePhotoFrameRectanglde.Game();
+        }
+
+        internal class Table
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Tabelle");
+
+                    int n = Helper.GetInt("Gib ein wie viele Schweinegatter ausgegeben werden sollen");
+                    Helper.FlipInt(ref n);
+
+                    Print(n);
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print(int n)
+            {
+                Console.WriteLine();
+                int length = n.ToString().Length * -1;
+                Console.WriteLine(String.Format($"{{0,{length}}} | Ausgabe", "X"));
+                Console.WriteLine("----------------------------------------------------------------------------");
+
+                for (int i = 0; i <= n; i++)
+                {
+                    Console.Write(String.Format($"{{0,{length}}} | ", i));
+                    for (int j = 0; j < i; j++)
+                    {
+                        Console.Write("#");
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+            }
+        }
+        internal class Rectangle
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Rechteck");
+
+                    Console.WriteLine("Gib die Dimensionen des Quadrats ein:");
+                    int line = Helper.GetInt("Zeilen:");
+                    Helper.FlipInt(ref line);
+
+                    int column = Helper.GetInt("Spalten :");
+                    Helper.FlipInt(ref column);
+
+
+                    Print(line, column);
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print(int maxLine, int maxColumn)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Zeilen : {maxLine} | Spalten : {maxColumn}");
+                Console.WriteLine("--------------------------");
+                Console.WriteLine();
+
+                for (int line = 0; line < maxLine; line++)
+                {
+                    for (int column = 0; column < maxColumn; column++)
+                    {
+                        Console.Write("#");
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+            }
+        }
+        internal class PhotoFrame
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Bilderrahmen");
+
+                    Console.WriteLine("Gib die Dimensionen des Bilderrahmens ein:");
+                    int line = Helper.GetInt("Zeilen:");
+                    Helper.FlipInt(ref line);
+
+                    int column = Helper.GetInt("Spalten :");
+                    Helper.FlipInt(ref column);
+
+
+                    Print(line, column);
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print(int maxLine, int maxColumn)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Zeilen : {maxLine} | Spalten : {maxColumn}");
+                Console.WriteLine("--------------------------");
+                Console.WriteLine();
+
+                for (int line = 0; line < maxLine; line++)
+                {
+                    Console.Write("  ");
+                    for (int column = 0; column < maxColumn; column++)
+                    {
+                        if (line == 0 || line == maxLine - 1)
+                        {
+                            Console.Write(new String('#', maxColumn));
+                            break;
+                        }
+
+                        if (column == 0 || column == maxColumn - 1)
+                        {
+                            Console.Write("#");
+                            continue;
+                        }
+
+                        Console.Write(" ");
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+            }
+        }
+        internal class MultiplePhotoFrameVertical
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Bilderrahmen");
+
+                    Console.WriteLine("Gib die Dimensionen des Bilderrahmens ein:");
+                    int line = Helper.GetInt("Zeilen:");
+                    Helper.FlipInt(ref line);
+
+                    int column = Helper.GetInt("Spalten :");
+                    Helper.FlipInt(ref column);
+
+                    int n = Helper.GetInt("Anzahl der Rahmen");
+                    Helper.FlipInt(ref n);
+
+
+                    Print(line, column, n);
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print(int maxLine, int maxColumn, int n)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Zeilen: {maxLine} | Spalten: {maxColumn} | Anzahl der Rahmen: {n}");
+                Console.WriteLine("---------------------------------------");
+
+                for (int count = 0; count < n; count++)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine($"Rahmen {count + 1}");
+                    Console.WriteLine();
+
+                    for (int line = 0; line < maxLine; line++)
+                    {
+                        Console.Write("  ");
+                        for (int column = 0; column < maxColumn; column++)
+                        {
+                            if (line == 0 || line == maxLine - 1)
+                            {
+                                Console.Write(new String('#', maxColumn));
+                                break;
+                            }
+
+                            if (column == 0 || column == maxColumn - 1)
+                            {
+                                Console.Write("#");
+                                continue;
+                            }
+
+                            Console.Write(" ");
+                        }
+                        Console.WriteLine();
+                    }
+                }
+
+                Console.WriteLine();
+            }
+        }
+        internal class MultiplePhotoFrameHorizontal
+        {
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Bilderrahmen");
+
+                    Console.WriteLine("Gib die Dimensionen des Bilderrahmens ein:");
+                    int line = Helper.GetInt("Zeilen:");
+                    Helper.FlipInt(ref line);
+
+                    int column = Helper.GetInt("Spalten :");
+                    Helper.FlipInt(ref column);
+
+                    int n = Helper.GetInt("Anzahl der Rahmen");
+                    Helper.FlipInt(ref n);
+
+
+                    Print(line, column, n);
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print(int maxLine, int maxColumn, int n)
+            {
+                string headline = "Rahmen: ";
+                int with = (GetWidth(maxColumn, n, headline) + 4) * -1;
+                Console.WriteLine();
+                Console.WriteLine($"Zeilen: {maxLine} | Spalten: {maxColumn} | Anzahl der Rahmen: {n}");
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine();
+
+                for (int count = 1; count <= n; count++)
+                {
+                    headline = $"  Rahmen: {count}";
+                    Console.Write(String.Format($"{{0,{with}}}", headline));
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+
+                for (int line = 0; line < maxLine; line++)
+                {
+                    Console.Write("  ");
+                    for (int _ = 0; _ < n; _++)
+                    {
+                        if (line == 0 || line == maxLine - 1)
+                        {
+                            string entry_line = new String('#', maxColumn);
+                            Console.Write(String.Format($"{{0,{with}}}", entry_line));
+                            continue;
+                        }
+
+                        string entry = new String("");
+                        for (int column = 0; column < maxColumn; column++)
+                        {
+                            if (column == 0 || column == maxColumn - 1)
+                            {
+                                entry += "#";
+                                continue;
+                            }
+                            entry += " ";
+                        }
+                        Console.Write(String.Format($"{{0,{with}}}", entry));
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+
+            }
+            private int GetWidth(int maxColumn, int n, string headline)
+            {
+                headline = $"{headline}{n}";
+                if (headline.Length > maxColumn)
+                {
+                    return headline.Length;
+                }
+                return maxColumn;
+            }
+        }
+        internal class MultiplePhotoFrameRectanglde
+        {
+            private int maxLine;
+            private int maxColumn;
+            private int globalLines;
+            private int globalColumns;
+            public void Game()
+            {
+                while (true)
+                {
+                    Helper.PrintHeadline("Schweinegatter-Bilderrahmen");
+
+                    Console.WriteLine("Gib die Dimensionen des Bilderrahmens ein:");
+                    maxLine = Helper.GetInt("Zeilen:");
+                    Helper.FlipInt(ref maxLine);
+
+                    maxColumn = Helper.GetInt("Spalten :");
+                    Helper.FlipInt(ref maxColumn);
+
+                    globalLines = Helper.GetInt("Zeilen der Bilderrahlen:");
+                    Helper.FlipInt(ref globalLines);
+
+                    globalColumns = Helper.GetInt("Spalten der Bilderrahlen:");
+                    Helper.FlipInt(ref globalColumns);
+
+
+                    Print();
+
+                    string quitInput = Helper.GetQuitInput();
+                    if (quitInput == "q")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            private void Print()
+            {
+                string headline = "Rahmen: ";
+                int with = (GetWidth(maxColumn, globalLines, globalColumns, headline) + 4) * -1;
+                Console.WriteLine();
+                Console.WriteLine($"Zeilen: {maxLine} | Spalten: {maxColumn} | Globale Zeilen: {globalLines} | Globale Spalten: {globalColumns}");
+                Console.WriteLine("--------------------------------------------------------------------------------------------------");
+                Console.WriteLine();
+
+                for (int globalLine = 1; globalLine <= globalLines; globalLine++)
+                {
+
+                    for (int globalCoumn = 1; globalCoumn <= globalColumns; globalCoumn++)
+                    {
+                        headline = $"  Rahmen: {globalLine}.{globalCoumn}";
+                        Console.Write(String.Format($"{{0,{with}}}", headline));
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine();
+
+                    for (int line = 0; line < maxLine; line++)
+                    {
+                        Console.Write("  ");
+                        for (int globalCoumn = 0; globalCoumn < globalColumns; globalCoumn++)
+                        {
+                            PrintLine(with, line);
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+            private void PrintLine(int with, int line)
+            {
+                if (line == 0 || line == maxLine - 1)
+                {
+                    string entry_line = new String('#', maxColumn);
+                    Console.Write(String.Format($"{{0,{with}}}", entry_line));
+                    return;
+                }
+
+                string entry = new String("");
+                for (int column = 0; column < maxColumn; column++)
+                {
+                    if (column == 0 || column == maxColumn - 1)
+                    {
+                        entry += "#";
+                        continue;
+                    }
+                    entry += " ";
+                }
+                Console.Write(String.Format($"{{0,{with}}}", entry));
+            }
+            private int GetWidth(int maxColumn, int globalLines, int globalColumns, string headline)
+            {
+                headline = $"{headline}{globalLines}.{globalColumns}";
+                if (headline.Length > maxColumn)
+                {
+                    return headline.Length;
+                }
+                return maxColumn;
+            }
         }
     }
 }
