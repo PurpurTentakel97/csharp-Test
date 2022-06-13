@@ -26,6 +26,7 @@ namespace Strings
             ("Fahne", UnionJackF),
             ("Fisch im Koihaufen", ContainsSubstringF),
             ("Schweinegatter", SchweinegatterF),
+            ("Constructors", ConstructorsMainF),
         };
         public void Game()
         {
@@ -106,6 +107,11 @@ namespace Strings
         {
             var chweinegatter = new Schweinegatter();
             chweinegatter.Game();
+        }
+        private static void ConstructorsMainF()
+        {
+            var constructorsMain = new ConstructorsMain();
+            constructorsMain.Game();
         }
     }
     internal class ReverseString
@@ -1132,6 +1138,110 @@ namespace Strings
                     return headline.Length;
                 }
                 return maxColumn;
+            }
+        }
+    }
+    internal class ConstructorsMain
+    {
+        public void Game()
+        {
+            while (true)
+            {
+                Helper.PrintHeadline("Constructors");
+
+                Execute();
+
+                string quitCondition = Helper.GetQuitInput();
+                if (quitCondition == "q")
+                {
+                    break;
+                }
+            }
+        }
+
+        private void Execute()
+        {
+            Constructors a = new Constructors("Hallo", 42, 1.23);
+            Constructors.Test(a, 5);
+
+            a = new Constructors("Test", 10);
+            Constructors.Test(a, 0);
+
+            a = new Constructors(null, 1, 4.32);
+            Constructors.Test(a, 0);
+
+            a = new Constructors(null);
+            Constructors.Test(a, 0);
+
+            a.S = "Hallo";
+            Constructors.Test(a, 5);
+
+            a.S = null;
+            Constructors.Test(a, 5);
+
+
+        }
+
+        internal class Constructors
+        {
+            private int i;
+            private double d;
+            private string s;
+            public string S
+            {
+                get
+                {
+                    return s;
+                }
+                set
+                {
+                    bool invalidString = value is null || value.Length != 5;
+                    if (invalidString)
+                    {
+                        s = String.Empty;
+                        return;
+                    }
+
+                    s = value;
+                }
+            }
+
+            public Constructors(string s, int i, double d)
+            {
+                S = s;
+                this.i = i;
+                this.d = d;
+            }
+            public Constructors(string s, int i)
+            {
+                S = s;
+                this.i = i;
+            }
+            public Constructors(string s)
+            {
+                S = s;
+            }
+
+            public static void Test(Constructors testSubject, int expectedLength)
+            {
+                if (testSubject.S is null)
+                {
+                    Console.WriteLine("Error! String should not be null");
+                    return;
+                }
+                if (testSubject.S == String.Empty)
+                {
+                    Console.WriteLine($"Error! No String (expected {expectedLength})");
+                    return;
+                }
+                int length = testSubject.S.Length;
+                if (length != expectedLength)
+                {
+                    Console.WriteLine($"Error! String got an length of {length} (expected {expectedLength})");
+                    return;
+                }
+
+                Console.WriteLine("Test complete");
             }
         }
     }

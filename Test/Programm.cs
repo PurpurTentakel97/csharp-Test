@@ -23,6 +23,7 @@ namespace Test
             ("Weihnachtsbaum zeichnen",ChristmasTreeF),
             ("Wörterbuch Liste",DictionaryListF),
             ("Wörterbuch Dict",DictionaryDictF),
+            ("Sport Bet",SportBetF),
          };
 
         static void Main(string[] args)
@@ -65,6 +66,11 @@ namespace Test
         {
             var myDictionary = new MyDictionarryDict();
             myDictionary.Game();
+        }
+        private static void SportBetF()
+        {
+            var sportBet = new SportBet();
+            sportBet.Game();
         }
     }
 }
