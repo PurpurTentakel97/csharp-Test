@@ -9,6 +9,8 @@ namespace Helpers
 {
     internal class Helper
     {
+        private static Random random = new Random();
+
         private static string invalidInput = "Invalider Input";
         public static string GetQuitInput()
         {
@@ -129,17 +131,21 @@ namespace Helpers
 
         public static int[] GetRandomIntArray(int min, int max, int count)
         {
-            var random = new Random();
+
             var randomNumbers = new int[count];
             for (int i = 0; i < count; i++)
             {
-                int randomNumber = random.Next(min, max + 1);
+                int randomNumber = GetRandomInt(min, max);
                 randomNumbers[i] = randomNumber;
             }
 
             return randomNumbers;
 
 
+        }
+        public static int GetRandomInt(int min, int max)
+        {
+            return random.Next(min, max + 1);
         }
 
         public static void FlipInt(ref int x)
@@ -148,6 +154,15 @@ namespace Helpers
             {
                 x = x * -1;
             }
+        }
+
+        public static bool IsInRange(int toCheck, int min, int max)
+        {
+            bool isInRange =
+                min < toCheck
+                && toCheck < max;
+
+            return isInRange;
         }
 
         public static void PrintHeadline(string name)
