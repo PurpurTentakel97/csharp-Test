@@ -9,6 +9,7 @@ using Dictionaries;
 using Menues;
 using Numbers;
 using Strings;
+using Test.GameObject;
 using Tree;
 
 namespace Test
@@ -24,6 +25,7 @@ namespace Test
             ("Wörterbuch Liste",DictionaryListF),
             ("Wörterbuch Dict",DictionaryDictF),
             ("Sport Bet",SportBetF),
+            ("Game Object",GameObjectF),
          };
 
         static void Main(string[] args)
@@ -71,6 +73,11 @@ namespace Test
         {
             var sportBet = new SportBet();
             sportBet.Game();
+        }
+        private static void GameObjectF()
+        {
+            var game = new TestGame();
+            game.Game();
         }
     }
 }
