@@ -26,6 +26,7 @@ namespace Test
             ("Sport Bet",SportBetF),
             ("Game Object",GameObjectF),
             ("TicTacToe",TicTacToeF),
+            ("Matrix",MatrixF),
          };
 
         static void Main(string[] args)
@@ -83,6 +84,11 @@ namespace Test
         {
             var game = new TicTacToe.TestGame();
             game.Game();
+        }
+        private static void MatrixF()
+        {
+            var matrix = new Matrix.MatrixGame();
+            matrix.Game();
         }
     }
 }
