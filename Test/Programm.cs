@@ -6,6 +6,7 @@
  */
 
 using Dictionaries;
+using InheritanceNS;
 using Menues;
 using Numbers;
 using Strings;
@@ -27,6 +28,7 @@ namespace Test
             ("Game Object",GameObjectF),
             ("TicTacToe",TicTacToeF),
             ("Matrix",MatrixF),
+            ("Inheritance",InheritanceF),
          };
 
         static void Main(string[] args)
@@ -89,6 +91,11 @@ namespace Test
         {
             var matrix = new Matrix.MatrixGame();
             matrix.Game();
+        }
+        private static void InheritanceF()
+        {
+            var inheritance = new Inheritance();
+            inheritance.Game();
         }
     }
 }
