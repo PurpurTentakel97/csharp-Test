@@ -147,6 +147,11 @@ namespace Helpers
         {
             return random.Next(min, max + 1);
         }
+        public static double GetRandomDouble(double min, double max)
+        {
+            double value = random.NextDouble() * (max - min) + min;
+            return value;
+        }
 
         public static void FlipInt(ref int x)
         {

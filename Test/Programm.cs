@@ -9,6 +9,7 @@ using Dictionaries;
 using InheritanceNS;
 using Menues;
 using Numbers;
+using RolePlay;
 using Strings;
 using Tree;
 
@@ -29,6 +30,7 @@ namespace Test
             ("TicTacToe",TicTacToeF),
             ("Matrix",MatrixF),
             ("Inheritance",InheritanceF),
+            ("RolePlay",RolePlayF),
          };
 
         static void Main(string[] args)
@@ -96,6 +98,11 @@ namespace Test
         {
             var inheritance = new Inheritance();
             inheritance.Game();
+        }
+        private static void RolePlayF()
+        {
+            var rolePlay = new RolePlayGame();
+            rolePlay.Game();
         }
     }
 }
